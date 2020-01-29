@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('master');
-});
+Route::get('/', 'FrontendController@index')->name('homepage');
