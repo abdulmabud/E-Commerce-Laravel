@@ -48,7 +48,7 @@
                 <h5 class="d-inline"><del>BDT 200</del></h5>
               </div>
               <div class="card-footer">
-                <button class="btn btn-primary btn-block">Add to Cart</button>
+              <a href="{{ route('cart.add', 9) }}" class="btn btn-primary btn-block">Add to Cart</a>
               </div>
             </div>
           </div>
