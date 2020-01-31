@@ -41,22 +41,24 @@
 
         <div class="row">
 
+          @foreach ($products as $product)
+              
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
               <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Item One</a>
+                  <a href="#">{{ $product->name }}</a>
                 </h4>
-                <h5 class="d-inline">BDT 300</h5>
-                <h5 class="d-inline"><del>BDT 200</del></h5>
+                <h5 class="d-inline">BDT {{ $product->regular_price }}</h5>
+                <h5 class="d-inline"><del>BDT {{ $product->sale_price }}</del></h5>
               </div>
               <div class="card-footer">
-              <a href="{{ route('cart.add', 9) }}" class="btn btn-primary btn-block">Add to Cart</a>
+              <a href="{{ route('cart.add', $product->id) }}" class="btn btn-primary btn-block">Add to Cart</a>
               </div>
             </div>
           </div>
-
+          @endforeach
           
 
         </div>
