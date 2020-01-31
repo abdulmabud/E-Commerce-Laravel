@@ -20,8 +20,12 @@ class UserController extends Controller
         }
 
        $request->session()->put('cart', $cart);
-        
-    }
+    //    echo $cart['products'][4]['name']; 
+    //    dd($cart);
+
+    //    $data['products'] = $cart;
+       return view('frontend.cart', $cart);
+     }
 
     public function showCart(Request $request){
         $output = $request->session()->get('cart');
