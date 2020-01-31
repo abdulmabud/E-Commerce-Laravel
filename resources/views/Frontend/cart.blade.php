@@ -1,5 +1,9 @@
 @extends('master');
 
+@section('title')
+    Cart
+@endsection
+
 @section('content')
     <div class="container">
         <h2 class="text-center text-primary">Cart Item List</h2>
@@ -35,7 +39,7 @@
             </tr>
         </table>
         <div style="margin-bottom: 4rem!important;">
-            <button class="float-right btn btn-primary w-25 btn-block">Checkout</button>
+        <a href="#" class="float-right btn btn-primary w-25 btn-block">Checkout</a>
         </div>
         
     </div>

@@ -8,14 +8,14 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>E-Commerce Laravel</title>
+  <title>@yield('title')</title>
 
   <!-- Bootstrap core CSS -->
 <link href="{{ asset('custom/css/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
 <link href="{{ asset('custom/css/shop-homepage.css') }}" rel="stylesheet">
-
+@yield('customcss')
 </head>
 
 <body>
@@ -61,7 +61,7 @@
   <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('custom/js/jquery.min.js') }}"></script>
   <script src="{{ asset('custom/js/bootstrap.bundle.min.js') }}"></script>
-
+@yield('customjs')
 </body>
 
 </html>

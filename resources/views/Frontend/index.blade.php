@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+  E-Commerce Laravel
+@endsection
+
 @section('content')
 <div class="container">
 
