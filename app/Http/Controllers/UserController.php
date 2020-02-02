@@ -9,6 +9,13 @@ class UserController extends Controller
     public function cartAdd(Request $request, $productId){
 
         $cart = $request->session()->get('cart');
+        if($cart == null){
+            $cart['products'][$productId] = [
+                'name' => 'New Product',
+                'quantity' => 1,
+                'price' => 34
+            ];
+        }
         if(array_key_exists($productId, $cart['products'])){
             $cart['products'][$productId]['quantity'] += 1;
         }else{
