@@ -14,41 +14,22 @@
       <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-muted">Your cart</span>
-          <span class="badge badge-secondary badge-pill">3</span>
+          <span class="badge badge-secondary badge-pill">{{ count($products) }}</span>
         </h4>
         <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Product name</h6>
-              <small class="text-muted">Brief description</small>
-            </div>
-            <span class="text-muted">$12</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Second product</h6>
-              <small class="text-muted">Brief description</small>
-            </div>
-            <span class="text-muted">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Third item</h6>
-              <small class="text-muted">Brief description</small>
-            </div>
-            <span class="text-muted">$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between bg-light">
-            <div class="text-success">
-              <h6 class="my-0">Promo code</h6>
-              <small>EXAMPLECODE</small>
-            </div>
-            <span class="text-success">-$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
-          </li>
+          @foreach ($products as $product)
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">{{ $product['name'] }}</h6>
+                <small class="text-muted">(Quantity) {{ $product['quantity'] }} <span> * (Unit Price)</span> {{ $product['price'] }} </small>
+              </div>
+              <span class="text-muted">BDT <span class="price">{{ number_format($product['price'] * $product['quantity'], 2) }}</span></span>
+            </li>
+          @endforeach
+          <li class="list-group-item d-flex justify-content-between lh-condensed" style="font-weight: 500;">Subtotal <span>BDT <span class="subTotal"></span> </span></li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed" style="font-weight: 500;">Delivery Charge<span>BDT <span class="deliveryCharge">50.00</span> </span></li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed" style="font-weight: 500;">Total Price <span>BDT <span class="totalPrice"></span> </span></li>
+          
         </ul>
 
         <form class="card p-2">
@@ -91,4 +72,20 @@
       </div>
     </div>
 </div>
+@endsection
+
+@section('customjs')
+<script>
+  var sum = 0;
+      $('.price').each(function(){
+          sum += parseFloat($(this).text().replace(',', ''));  // Or this.innerHTML, this.innerText
+      });
+
+      var deliveryCharge = parseInt($('.deliveryCharge').text());
+      var totalPrice = sum + deliveryCharge;
+      totalPrice = totalPrice.toFixed(2);
+      sum = sum.toFixed(2);
+      $('.subTotal').text(sum);
+      $('.totalPrice').text(totalPrice); 
+  </script>
 @endsection
