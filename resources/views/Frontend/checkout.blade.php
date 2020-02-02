@@ -47,22 +47,22 @@
           <div class="row">
             <div class="col-md-12 mb-3">
               <label for="firstName">Name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required> 
+              <input type="text" class="form-control" name="fullname" placeholder="" value="" required> 
             </div>
           </div>
 
           <div class="mb-3">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" placeholder="+8801700111222">
+            <input type="text" class="form-control" name="phone" placeholder="+8801700111222">
           </div>
           <div class="mb-3">
             <label for="email">Email <span class="text-muted">(Optional)</span></label>
-            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+            <input type="email" class="form-control" name="email" placeholder="you@example.com">
           </div>
 
           <div class="mb-3">
             <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" required>
+            <input type="text" class="form-control" name="address" required>
         
           </div>
 
