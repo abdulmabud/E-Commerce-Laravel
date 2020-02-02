@@ -19,7 +19,7 @@
             <td class="text-left">{{ $product['name'] }}</td>
                 <td>BDT {{ $product['price'] }}</td>
                 <td class="text-center">{{ $product['quantity'] }}</td>
-                <td class="text-right pr-5" style="width: 15%;">BDT {{ $product['price'] * $product['quantity'] }}</td>
+                <td class="text-right pr-5" style="width: 15%;">BDT <span class="price">{{ $product['price'] * $product['quantity'] }}</span> </td>
             </tr>
             @endforeach
             
@@ -27,15 +27,15 @@
         <table class="table table-bordered w-50" style="margin-left: 50%;">
             <tr>
                 <td>Subtotal Total</td>
-                <td>BDT 443.34</td>
+                <td class="text-right pr-3">BDT <span class="subTotal"></span></td>
             </tr>
             <tr>
                 <td>Delivery Charge</td>
-                <td>BDT 50.00</td>
+                <td class="text-right pr-3">BDT <span class="deliveryCharge">50.00</span> </td>
             </tr>
             <tr>
                 <td>Total Price</td>
-                <td>BDT 334.34</td>
+                <td class="text-right pr-3">BDT <span class="totalPrice"></span></td>
             </tr>
         </table>
         <div style="margin-bottom: 4rem!important;">
@@ -43,4 +43,21 @@
         </div>
         
     </div>
+@endsection
+
+@section('customjs')
+    <script>
+    var sum = 0;
+        $('.price').each(function(){
+            sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
+        });
+
+        var deliveryCharge = parseInt($('.deliveryCharge').text());
+        var totalPrice = sum + deliveryCharge;
+        totalPrice = totalPrice.toFixed(2);
+        sum = sum.toFixed(2);
+        $('.subTotal').text(sum);
+        $('.totalPrice').text(totalPrice); 
+    </script>
+
 @endsection
