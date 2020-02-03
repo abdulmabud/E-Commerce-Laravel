@@ -14,7 +14,7 @@ $factory->define(Product::class, function (Faker $faker) {
             'name' => $faker->name,
             'regular_price' => random_int(50, 1000),
             'sale_price' => random_int(50, 1000),
-            'category_id' => 1,
+            'category_id' => random_int(1, 5),
             'status' => 1
 
     ];
