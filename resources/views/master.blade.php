@@ -39,6 +39,9 @@
             <a class="nav-link" href="#">Category</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('cart.show') }}">Cart</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#">FAQ</a>
           </li>
           <li class="nav-item">
