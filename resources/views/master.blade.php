@@ -51,7 +51,7 @@
       </div>
     </div>
   </nav>
-
+  @include('frontend.inc.message')
   @yield('content')
   <!-- Footer -->
   <footer class="py-5 bg-dark">

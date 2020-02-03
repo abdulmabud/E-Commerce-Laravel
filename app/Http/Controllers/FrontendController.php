@@ -38,7 +38,7 @@ class FrontendController extends Controller
     //    dd($cart);
 
     //    $data['products'] = $cart;
-       return view('frontend.cart', $cart);
+       return redirect()->route('cart.show')->with('success', 'Product added in cart Successfully');
      }
 
      public function showCart(Request $request){
