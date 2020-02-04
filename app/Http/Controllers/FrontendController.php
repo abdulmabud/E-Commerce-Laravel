@@ -43,7 +43,12 @@ class FrontendController extends Controller
 
      public function showCart(Request $request){
         $cart = $request->session()->get('cart');
-         return view('frontend.cart', $cart);
+        if($cart == null){
+            return view('frontend.cartnoitem');
+        }else{
+            return view('frontend.cart', $cart);
+        }
+         
      }
 
     public function checkout(Request $request){
