@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Order;
+use App\OrderItem;
 use Validator;
 
 class FrontendController extends Controller
@@ -69,6 +70,8 @@ class FrontendController extends Controller
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();
         }
+        $lastOrderId = Order::select('id')->orderBy('id', 'desc')->first();
+        $lastOrderId = $lastOrderId->id + 1;
         $orderObj = new Order;
         $orderObj->user_name = $request->name;
         $orderObj->user_phone = $request->phone;
@@ -78,8 +81,23 @@ class FrontendController extends Controller
         $orderObj->delivery_charge = $request->delivery_charge;
         $orderObj->total_price = $request->total_price;
 
+        $cart = $request->session()->get('cart');
+
         $orderObj->save();
 
+        if($cart != null){
+           
+            $products = $cart['products'];
+            foreach($products as $product){
+                $orderItem = new OrderItem;
+                $orderItem->order_id = $lastOrderId;
+                $orderItem->product_name = $product['name'];
+                $orderItem->unit_price = $product['price'];
+                $orderItem->quantity = $product['quantity'];
+                $orderItem->save();
+            }
+        }
+        $request->session()->forget('cart');
         return redirect()->route('homepage')->with('success', 'Order Place Successfully');
         
     }
