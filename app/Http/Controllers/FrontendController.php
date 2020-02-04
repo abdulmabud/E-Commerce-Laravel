@@ -55,4 +55,5 @@ class FrontendController extends Controller
         $cart = $request->session()->get('cart');
         return view('frontend.checkout', $cart);
     }
+    
 }
