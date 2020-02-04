@@ -16,3 +16,5 @@ Route::get('/', 'FrontendController@index')->name('homepage');
 Route::get('/cart/{id}', 'FrontendController@cartAdd')->name('cart.add');
 Route::get('/cart', 'FrontendController@showCart')->name('cart.show');
 Route::get('/checkout', 'FrontendController@checkout')->name('checkout');
+
+Route::post('/order','FrontendController@store')->name('order.store');

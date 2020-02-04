@@ -43,11 +43,12 @@
       </div>
       <div class="col-md-8 order-md-1 mb-4">
         <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+        <form action="{{ route('order.store') }}" method="POST" class="needs-validation" novalidate>
+          @csrf
           <div class="row">
             <div class="col-md-12 mb-3">
               <label for="firstName">Name</label>
-              <input type="text" class="form-control" name="fullname" placeholder="" value="" required> 
+              <input type="text" class="form-control" name="name" placeholder="" value="" required> 
             </div>
           </div>
 
@@ -65,7 +66,13 @@
             <input type="text" class="form-control" name="address" required>
         
           </div>
+          {{-- hidden input  --}}
+          <input type="hidden" name="subtotal" id="hsubtotal">
+          <input type="hidden" name="delivery_charge" id="hdeliverycharge">
+          <input type="hidden" name="total_price" id="htotalprice">
 
+
+          {{-- end hidden input  --}}
           <hr class="mb-4">
           <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
         </form>
@@ -87,5 +94,9 @@
       sum = sum.toFixed(2);
       $('.subTotal').text(sum);
       $('.totalPrice').text(totalPrice); 
+
+      $('#hsubtotal').val(sum);
+      $('#hdeliverycharge').val(deliveryCharge);
+      $('#htotalprice').val(totalPrice);
   </script>
 @endsection
