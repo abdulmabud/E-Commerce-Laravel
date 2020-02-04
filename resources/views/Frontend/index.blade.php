@@ -50,8 +50,8 @@
                 <h4 class="card-title">
                   <a href="#">{{ $product->name }}</a>
                 </h4>
-                <h5 class="d-inline">BDT {{ $product->regular_price }}</h5>
                 <h5 class="d-inline"><del>BDT {{ $product->sale_price }}</del></h5>
+                <h5 class="d-inline">BDT {{ $product->regular_price }}</h5>
               </div>
               <div class="card-footer">
               <a href="{{ route('cart.add', $product->id) }}" class="btn btn-primary btn-block">Add to Cart</a>

@@ -13,9 +13,17 @@
               <span class="sr-only">(current)</span>
             </a>
           </li>
+          <div class="dropdown show">
           <li class="nav-item">
-            <a class="nav-link" href="#">Category</a>
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              @foreach ($categories as $category)
+              <a class="dropdown-item" href="#">{{ $category->name }}</a>
+              @endforeach
+              
+            </div>
           </li>
+          </div>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('cart.show') }}">Cart</a>
           </li>
