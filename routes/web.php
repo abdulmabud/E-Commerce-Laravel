@@ -24,3 +24,4 @@ Route::post('/order','FrontendController@store')->name('order.store');
 // admin area
 
 Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
+Route::get('/admin/order', 'AdminController@order')->name('admin.order');
