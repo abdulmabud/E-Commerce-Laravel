@@ -15,6 +15,12 @@ class FrontendController extends Controller
         return view('frontend.index', $data);
     }
 
+    public function productDetail($productId){
+        $data['product'] = Product::find($productId)->first();
+
+        return view('frontend.productdetails', $data);
+    }
+
     public function cartAdd(Request $request, $productId){
 
         $product = Product::select('name', 'sale_price')->where('id', $productId)->first();

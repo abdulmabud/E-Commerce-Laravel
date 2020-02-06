@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'FrontendController@index')->name('homepage');
+Route::get('/product/{id}', 'FrontendController@productDetail')->name('product.details');
 
 Route::get('/cart/{id}', 'FrontendController@cartAdd')->name('cart.add');
 Route::get('/cart', 'FrontendController@showCart')->name('cart.show');

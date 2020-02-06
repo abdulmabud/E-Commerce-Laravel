@@ -48,7 +48,7 @@
               <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">{{ $product->name }}</a>
+                  <a href="{{ route('product.details', $product->id) }}">{{  $product->name   }}</a>
                 </h4>
                 <h5 class="d-inline"><del>BDT {{ $product->sale_price }}</del></h5>
                 <h5 class="d-inline">BDT {{ $product->regular_price }}</h5>
