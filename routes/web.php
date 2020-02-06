@@ -19,3 +19,8 @@ Route::get('/cart', 'FrontendController@showCart')->name('cart.show');
 Route::get('/checkout', 'FrontendController@checkout')->name('checkout');
 
 Route::post('/order','FrontendController@store')->name('order.store');
+
+
+// admin area
+
+Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
