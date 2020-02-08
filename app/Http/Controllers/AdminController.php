@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\OrderItem;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,8 @@ class AdminController extends Controller
 
     public function orderDetails($id){
         $data['order'] = Order::find($id);
-        // $orderId = $data['order']['id'];
+        $data['orders'] = OrderItem::where('order_id', $id)->get();
+      
         return view('admin.order.orderdetails', $data);
     }
 }

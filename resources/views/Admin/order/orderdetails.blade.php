@@ -32,32 +32,33 @@
         <div class="productList mt-4">
             <table class="table table-bordered">
                 <tr>
-                    <td>Product Id</td>
-                    <td>Product Name</td>
-                    <td>Unit Price</td>
-                    <td>Quantity</td>
-                    <td>Total Price</td>
+                    <th>Product Name</th>
+                    <th>Unit Price</th>
+                    <th class="text-center">Quantity</th>
+                    <th>Total Price</th>
                 </tr>
+                @foreach ($orders as $orderitem)
                 <tr>
-                    <td>32</td>
-                    <td>Jsdfsf Udsf</td>
-                    <td>434.33</td>
-                    <td>3</td>
-                    <td>3232.34</td>
+                    <td>{{ $orderitem->product_name }}</td>
+                    <td>BDT {{ $orderitem->unit_price }}</td>
+                    <td class="text-center">{{ $orderitem->quantity }}</td>
+                    <td>BDT {{ $orderitem->unit_price * $orderitem->quantity }}</td>
                 </tr>
+                @endforeach
+               
             </table>
             <table class="table table-bordered w-50 ml-auto">
                 <tr>
                     <td>Subtotal</td>
-                    <td>BDT 434.34</td>
+                    <td>BDT {{ $order->subtotal }}</td>
                 </tr>
                 <tr>
                     <td>Delivery Charge</td>
-                    <td>BDT 44.34</td>
+                    <td>BDT {{ $order->delivery_charge }}</td>
                 </tr>
                 <tr>
                     <td>Total Price</td>
-                    <td>BDT 3344.34</td>
+                    <td>BDT {{ $order->total_price }}</td>
                 </tr>
             </table>
         </div>
