@@ -77,7 +77,12 @@ class FrontendController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $lastOrderId = Order::select('id')->orderBy('id', 'desc')->first();
-        $lastOrderId = $lastOrderId->id + 1;
+        if($lastOrderId == null){
+            $lastOrderId = 1;
+        }else{
+            $lastOrderId = $lastOrderId->id + 1;
+        }
+        
         $orderObj = new Order;
         $orderObj->user_name = $request->name;
         $orderObj->user_phone = $request->phone;
