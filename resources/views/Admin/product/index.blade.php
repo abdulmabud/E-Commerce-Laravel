@@ -21,7 +21,7 @@
                 <td>{{ $product->name }}</td>
                 <td>BDT {{ $product->regular_price }} <del class="ml-3">BDT  {{ $product->sale_price }}</del> </td>
                 <td>{{ $product->category_id }}</td>
-                <td><a href="#" class="btn btn-primary">Details</a></td>
+                <td><a href="{{ route('product.show', $product->id) }}" class="btn btn-primary">Details</a></td>
             </tr>
             @endforeach
            
