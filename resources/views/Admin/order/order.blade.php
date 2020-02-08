@@ -20,7 +20,7 @@
                 <td>{{ $order->created_at }}</td>
                 <td>{{ $order->user_name }}</td>
                 <td>{{ $order->total_price }}</td>
-                <td><button class="btn btn-primary">Details</button></td>
+            <td><a href="{{ route('admin.order.details', $order->id) }}" class="btn btn-primary">Details</a></td>
             </tr>
             @endforeach
         </table>
