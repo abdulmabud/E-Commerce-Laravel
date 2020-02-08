@@ -26,3 +26,8 @@ Route::post('/order','FrontendController@store')->name('order.store');
 Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 Route::get('/admin/order', 'AdminController@order')->name('admin.order');
 Route::get('/admin/order/{id}', 'AdminController@orderDetails')->name('admin.order.details');
+
+
+//ProductController 
+
+Route::resource('admin/product', 'ProductController');
