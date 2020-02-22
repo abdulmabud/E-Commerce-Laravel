@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\ProductImage;
+use App\Category;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -26,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $data['categories'] = Category::select('id', 'name')->where('status', 1)->get();
+        return view('admin.product.createproduct', $data);
     }
 
     /**
@@ -37,7 +41,54 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            // 'name' => 'required',
+            // 'regular_price' => 'required',
+            // 'category_id' => 'required',
+            // 'status' => 'required'
+
+        ]);
+       
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        
+        $productObj = new Product();
+        
+        $productObj->name = $request->name;
+        $productObj->regular_price = $request->regular_price;
+        $productObj->sale_price = $request->sale_price;
+        $productObj->category_id = $request->category_id;
+        $productObj->status = $request->status;
+        $productObj->save();
+
+        if($request->hasFile('thumbnail_image')){
+            $productImageObj = new ProductImage();
+            $image = $request->file('thumbnail_image');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $path = public_path('upload/product/image');
+            $image->move($path, $name);
+            $productImageObj->image = $name;
+            $productImageObj->thumbnail_image = 1;
+            $productImageObj->product_id = 1;
+            $productImageObj->save();
+        } 
+
+        if($request->hasFile('image')){
+            $images = $request->file('image');
+            foreach($images as $image){
+                $productImageObj = new ProductImage();
+                $name = time().rand(100, 999).'.'.$image->getClientOriginalExtension();
+                $path = public_path('upload/product/image');
+                $image->move($path, $name);
+                $productImageObj->image = $name;
+                $productImageObj->thumbnail_image = 0;
+                $productImageObj->product_id = 1;
+                $productImageObj->save();
+            }
+           
+        } 
+
     }
 
     /**

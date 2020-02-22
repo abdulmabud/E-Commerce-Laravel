@@ -22,6 +22,7 @@
 
   <div class="d-flex" id="wrapper">
 
+
     @include('admin.inc.menu')
 
     <!-- Page Content -->
@@ -34,6 +35,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </nav>
+      @include('admin.inc.message')
       @yield('content')
     </div>
     <!-- /#page-content-wrapper -->

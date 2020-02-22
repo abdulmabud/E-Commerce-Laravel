@@ -6,7 +6,11 @@
 
 @section('content')
     <div class="container">
-        <h3 class="text-center my-3 text-primary">Product List</h3>
+        <div class="mt-3">
+            <h3 class="text-center my-3 text-primary d-inline">Product List</h3>
+            <p class="d-inline"><a href="{{ route('product.create') }}" class="float-right mr-5 btn btn-primary">Add Product</a></p>
+        </div>
+              
         <table class="table table-bordered mt-3">
             <tr>
                 <th>Product Id</th>
