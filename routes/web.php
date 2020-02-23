@@ -31,3 +31,4 @@ Route::get('/admin/order/{id}', 'AdminController@orderDetails')->name('admin.ord
 //ProductController 
 
 Route::resource('admin/product', 'ProductController');
+Route::resource('admin/category', 'CategoryController');
