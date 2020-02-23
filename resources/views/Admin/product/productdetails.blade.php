@@ -36,7 +36,14 @@
                 </tr>
                 <tr>
                     <td><a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary">Edit Product</a></td>
-                    <td><a href="#" class="btn btn-danger">Delete Product</a></td>
+                  <td>
+                    <form action="{{ route('product.destroy', $product->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" class="btn btn-danger" value="Delete Product">
+                   </form>
+                  </td>
+                    
                 </tr>
             </table>
         </div>
