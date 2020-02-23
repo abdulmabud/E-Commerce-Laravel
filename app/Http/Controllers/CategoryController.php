@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use Validator;
 
 class CategoryController extends Controller
 {
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.createcategory');
     }
 
     /**
@@ -36,7 +37,25 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'status' => 'required'
+
+        ]);
+       
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        $categoryObj = new Category();
+
+        $categoryObj->name = $request->name;
+        $categoryObj->slug = str_slug($request->name, '-');
+        $categoryObj->category_id = $request->category_id;
+        $categoryObj->status = $request->status;
+        $categoryObj->save();
+
+        return redirect()->route('category.index')->with('success', "Category added Successfully");
     }
 
     /**
@@ -66,7 +85,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['category'] = Category::find($id);
+        return view('admin.category.editcategory', $data);
     }
 
     /**
@@ -78,7 +98,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'status' => 'required'
+
+        ]);
+       
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        $categoryObj = Category::find($id);
+
+        $categoryObj->name = $request->name;
+        $categoryObj->slug = str_slug($request->name, '-');
+        $categoryObj->category_id = $request->category_id;
+        $categoryObj->status = $request->status;
+        $categoryObj->save();
+
+        return redirect()->route('category.index')->with('success', "Category Updated Successfully");
     }
 
     /**
@@ -89,6 +127,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categoryObj = Category::find($id);
+        $categoryObj->delete();
+        return redirect()->route('category.index')->with('success', 'Category Deleted Successfully');
     }
 }
