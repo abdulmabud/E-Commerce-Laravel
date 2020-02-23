@@ -35,7 +35,7 @@
                     <td>{{ $product->status }}</td>
                 </tr>
                 <tr>
-                    <td><a href="#" class="btn btn-primary">Edit Product</a></td>
+                    <td><a href="{{ route('product.edit', $product->id) }}" class="btn btn-primary">Edit Product</a></td>
                     <td><a href="#" class="btn btn-danger">Delete Product</a></td>
                 </tr>
             </table>
