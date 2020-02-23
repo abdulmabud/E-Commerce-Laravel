@@ -47,7 +47,15 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['category'] = Category::find($id);
+        $category_id = $data['category']['category_id'];
+        $data['categoryName'] = Category::select('name')->where('id', $category_id)->first();
+        if($data['categoryName'] == null){
+            $data['aa'] = 1;
+        }else{
+            $data['aa'] = 0;
+        }
+        return view('admin.category.categorydetails', $data);
     }
 
     /**
