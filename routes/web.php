@@ -32,3 +32,5 @@ Route::get('/admin/order/{id}', 'AdminController@orderDetails')->name('admin.ord
 
 Route::resource('admin/product', 'ProductController');
 Route::resource('admin/category', 'CategoryController');
+
+Route::get('admin/featuredproduct', 'ProductController@featuredproduct')->name('featuredproduct.index');

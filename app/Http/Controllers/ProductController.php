@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\FeaturedProduct;
 use App\ProductImage;
 use App\Category;
 use Validator;
@@ -192,5 +193,13 @@ class ProductController extends Controller
         $productObj = Product::find($id);
         $productObj->delete();
         return redirect()->route('product.index')->with('success', 'Product Deleted Successfully');
+    }
+
+    // Featured Product
+
+    public function featuredproduct(){
+        $data['featuredproducts'] = FeaturedProduct::with('product')->select('id', 'product_id')->get();
+// dd($data);
+        return view('admin.product.featuredproduct', $data);
     }
 }
