@@ -31,16 +31,18 @@ class FrontendController extends Controller
                 'quantity' => 1,
                 'price' => $product->sale_price
             ];
-        }
-        if(array_key_exists($productId, $cart['products'])){
-            $cart['products'][$productId]['quantity'] += 1;
         }else{
-            $cart['products'][$productId] = [
-                'name' => $product->name,
-                'quantity' => 1,
-                'price' => $product->sale_price
-            ];
+            if(array_key_exists($productId, $cart['products'])){
+                $cart['products'][$productId]['quantity'] += 1;
+            }else{
+                $cart['products'][$productId] = [
+                    'name' => $product->name,
+                    'quantity' => 1,
+                    'price' => $product->sale_price
+                ];
+            }
         }
+        
 
        $request->session()->put('cart', $cart);
     //    echo $cart['products'][4]['name']; 
