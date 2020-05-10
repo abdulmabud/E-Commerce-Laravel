@@ -54,7 +54,8 @@
                 <h5 class="d-inline">BDT {{ $product->regular_price }}</h5>
               </div>
               <div class="card-footer">
-              <a href="{{ route('cart.add', $product->id) }}" class="btn btn-primary btn-block">Add to Cart</a>
+                <input type="hidden" value="{{ $product->id }}" id="productId">
+              <button data-productid="{{ $product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
               </div>
             </div>
           </div>
@@ -71,4 +72,21 @@
     <!-- /.row -->
 
   </div>
+@endsection
+
+@section('customjs')
+    <script>
+      $('.addtocart').click(function(){
+        var productId = this.dataset.productid;
+        $.ajax({
+          url: '{{ route('cart.add') }}',
+          method: 'POST',
+          data: {productId: productId, _token: '{{ csrf_token() }}' },
+          cache: false,
+          success: function(data){
+            console.log(data);
+          }
+        });
+      });
+    </script>
 @endsection

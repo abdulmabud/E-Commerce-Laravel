@@ -21,8 +21,8 @@ class FrontendController extends Controller
         return view('frontend.productdetails', $data);
     }
 
-    public function cartAdd(Request $request, $productId){
-
+    public function cartAdd(Request $request){
+        $productId = $request->productId;
         $product = Product::select('name', 'sale_price')->where('id', $productId)->first();
         $cart = $request->session()->get('cart');
         if($cart == null){
@@ -49,8 +49,9 @@ class FrontendController extends Controller
     //    dd($cart);
 
     //    $data['products'] = $cart;
-       return redirect()->route('cart.show')->with('success', 'Product added in cart Successfully');
-     }
+    //    return redirect()->route('cart.show')->with('success', 'Product added in cart Successfully');
+        return "Add to cart Successfully";
+}
 
      public function showCart(Request $request){
         $cart = $request->session()->get('cart');
