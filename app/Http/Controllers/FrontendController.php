@@ -50,7 +50,7 @@ class FrontendController extends Controller
 
     //    $data['products'] = $cart;
     //    return redirect()->route('cart.show')->with('success', 'Product added in cart Successfully');
-        return "Add to cart Successfully";
+        return "Successfully";
 }
 
      public function showCart(Request $request){
