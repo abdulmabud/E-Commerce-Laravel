@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\FeaturedProduct;
 use App\Order;
 use App\OrderItem;
 use Validator;
@@ -12,6 +13,7 @@ class FrontendController extends Controller
 {
     public function index(){
         $data['products'] = Product::where('status', 1)->get();
+        $data['fproducts'] = FeaturedProduct::with('product')->select('product_id')->take(8)->get();
         return view('frontend.index', $data);
     }
 

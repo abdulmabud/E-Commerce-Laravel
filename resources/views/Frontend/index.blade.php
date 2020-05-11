@@ -38,7 +38,29 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
+        <h2>Featured Product</h2>
+        <div class="row">
+          @foreach ($fproducts as $product)
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="{{ route('product.details', $product->product->id) }}">{{  $product->product->name   }}</a>
+                </h4>
+                <h5 class="d-inline"><del>BDT {{ $product->product->sale_price }}</del></h5>
+                <h5 class="d-inline">BDT {{ $product->product->regular_price }}</h5>
+              </div>
+              <div class="card-footer">
+                <input type="hidden" value="{{ $product->product->id }}" id="productId">
+              <button data-productid="{{ $product->product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          @endforeach
+        </div>
+      
+        <h2>New Arrival</h2>
         <div class="row">
 
           @foreach ($products as $product)
