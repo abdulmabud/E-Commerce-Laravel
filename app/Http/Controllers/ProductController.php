@@ -202,4 +202,18 @@ class ProductController extends Controller
 // dd($data);
         return view('admin.product.featuredproduct', $data);
     }
+
+    public function addfproduct(Request $request){
+        $key = $request->productName;
+        $data['products'] = Product::where('name', 'like', '%'.$key.'%')->get();
+        return view('admin.product.addfeaturedproduct', $data);
+    }
+
+    public function savefproduct($productId){
+        $fproduct = new FeaturedProduct();
+        $fproduct->product_id = $productId;
+        $fproduct->save();
+
+        return redirect()->route('featuredproduct.index')->with('success', 'Featured Product added Successfully');
+    }
 }

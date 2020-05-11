@@ -8,9 +8,20 @@
 <div class="container">
     <div class="mt-3">
         <h3 class="text-center my-3 text-primary d-inline">Featured Product List</h3>
-        <p class="d-inline"><a href="" class="float-right mr-5 btn btn-primary">Add Featured Product</a></p>
+        <p class="d-inline"><button class="float-right mr-5 btn btn-primary addfproductBtn">Add Featured Product</button></p>
     </div>
-          
+    <div class="addfproductbox">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <form action="{{ route('addfproduct') }}" method="post" class="form-group">
+                    @csrf
+                    <input type="text" name="productName" class="form-control mb-4">
+                    <input type="submit" value="Search Product" class="btn btn-primary btn-block">
+                </form>
+            </div>      
+        </div>
+    </div>
+   
     <table class="table table-bordered mt-3">
         <tr>
             <th>Product Id</th>
@@ -31,4 +42,16 @@
        
     </table>
 </div>
+@endsection
+
+@section('customjs')
+    <script>
+        $('.addfproductbox').css('display', 'none');
+        $('.addfproductBtn').click(function(){
+            $('.addfproductbox').css('display', 'block');
+            console.log('clikci');
+            
+        });
+        
+    </script>
 @endsection
