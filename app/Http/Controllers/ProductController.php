@@ -199,14 +199,24 @@ class ProductController extends Controller
 
     public function featuredproduct(){
         $data['featuredproducts'] = FeaturedProduct::with('product')->select('id', 'product_id')->get();
-// dd($data);
+        // dd($count);
         return view('admin.product.featuredproduct', $data);
     }
 
     public function addfproduct(Request $request){
-        $key = $request->productName;
-        $data['products'] = Product::where('name', 'like', '%'.$key.'%')->get();
-        return view('admin.product.addfeaturedproduct', $data);
+        $count = FeaturedProduct::count();
+        
+        if($count< 8){
+            $key = $request->productName;
+            dd($count);
+            $data['products'] = Product::where('name', 'like', '%'.$key.'%')->get();
+            return view('admin.product.addfeaturedproduct', $data);
+        }else{
+            return redirect()->route('featuredproduct.index')->with('warning', 'You can maximum 8 Featured Product');
+
+        }
+      
+        
     }
 
     public function savefproduct($productId){
