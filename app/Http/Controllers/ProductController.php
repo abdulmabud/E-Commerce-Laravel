@@ -208,11 +208,10 @@ class ProductController extends Controller
         
         if($count< 8){
             $key = $request->productName;
-            dd($count);
             $data['products'] = Product::where('name', 'like', '%'.$key.'%')->get();
             return view('admin.product.addfeaturedproduct', $data);
         }else{
-            return redirect()->route('featuredproduct.index')->with('warning', 'You can maximum 8 Featured Product');
+            return redirect()->route('featuredproduct.index')->with('warning', 'You can add maximum 8 Featured Product');
 
         }
       
@@ -220,10 +219,14 @@ class ProductController extends Controller
     }
 
     public function savefproduct($productId){
-        $fproduct = new FeaturedProduct();
-        $fproduct->product_id = $productId;
-        $fproduct->save();
-
-        return redirect()->route('featuredproduct.index')->with('success', 'Featured Product added Successfully');
+        $isAdded = FeaturedProduct::select('id')->where('product_id', $productId)->first();
+        if($isAdded){
+            return redirect()->route('featuredproduct.index')->with('warning', 'Product already added as Featured Product');
+        }else{
+            $fproduct = new FeaturedProduct();
+            $fproduct->product_id = $productId;
+            $fproduct->save();
+            return redirect()->route('featuredproduct.index')->with('success', 'Featured Product added Successfully');
+        }
     }
 }
