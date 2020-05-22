@@ -13,6 +13,7 @@
 
 Route::get('/', 'FrontendController@index')->name('homepage');
 Route::get('/product/{id}', 'FrontendController@productDetail')->name('product.details');
+Route::get('category/{slug}', 'FrontendController@categoryProduct')->name('category.product');
 
 Route::post('/cart', 'FrontendController@cartAdd')->name('cart.add');
 Route::get('/cart', 'FrontendController@showCart')->name('cart.show');

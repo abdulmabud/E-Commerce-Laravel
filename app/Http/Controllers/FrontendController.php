@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\FeaturedProduct;
+use App\Category;
 use App\Order;
 use App\OrderItem;
 use Validator;
@@ -21,6 +22,13 @@ class FrontendController extends Controller
         $data['product'] = Product::find($productId)->first();
 
         return view('frontend.productdetails', $data);
+    }
+
+    public function categoryProduct($slug){
+        
+        $data['category'] = Category::with('products')->select('id', 'name')->where('slug', $slug)->first();
+        // dd($slug);
+        return view('frontend.categoryproduct', $data);
     }
 
     public function cartAdd(Request $request){
