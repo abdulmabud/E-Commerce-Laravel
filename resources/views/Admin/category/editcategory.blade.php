@@ -31,8 +31,8 @@
                     <td>Status</td>
                     <td>
                         <select name="status" id="" class="form-control">
-                            <option {{ $category->staus == 1 ? 'selected' : '' }} value="1">Publish</option>
-                            <option {{ $category->staus == 0 ? 'selected' : '' }} value="0">Unpublish</option>
+                            <option {{ $category->status == 1 ? 'selected' : '' }} value="1">Publish</option>
+                            <option {{ $category->status == 0 ? 'selected' : '' }} value="0">Unpublish</option>
                         </select>
                     </td>
                 </tr>

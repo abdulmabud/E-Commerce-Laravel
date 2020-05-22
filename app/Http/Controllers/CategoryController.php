@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $categoryObj = new Category();
 
         $categoryObj->name = $request->name;
-        $categoryObj->slug = str_slug($request->name, '-');
+        $categoryObj->slug = strtolower(str_replace(' ', '-', $request->name));
         $categoryObj->category_id = $request->category_id;
         $categoryObj->status = $request->status;
         $categoryObj->save();
@@ -111,7 +111,7 @@ class CategoryController extends Controller
         $categoryObj = Category::find($id);
 
         $categoryObj->name = $request->name;
-        $categoryObj->slug = str_slug($request->name, '-');
+        $categoryObj->slug = strtolower(str_replace(' ', '-', $request->name));
         $categoryObj->category_id = $request->category_id;
         $categoryObj->status = $request->status;
         $categoryObj->save();
