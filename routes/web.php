@@ -36,3 +36,4 @@ Route::resource('admin/category', 'CategoryController');
 Route::get('admin/featuredproduct', 'ProductController@featuredproduct')->name('featuredproduct.index');
 Route::post('admin/add-featured-product', 'ProductController@addfproduct')->name('addfproduct');
 Route::get('admin/add-featured-product/{id}', 'ProductController@savefproduct')->name('savefproduct');
+Route::delete('admin/fproductdelete/{id}', 'ProductController@fproductdelete')->name('fproduct.delete');

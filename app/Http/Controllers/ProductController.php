@@ -229,4 +229,11 @@ class ProductController extends Controller
             return redirect()->route('featuredproduct.index')->with('success', 'Featured Product added Successfully');
         }
     }
+
+    public function fproductdelete($productId){
+        $productObj = FeaturedProduct::find($productId);
+        $productObj->delete();
+
+        return redirect()->route('featuredproduct.index')->with('success', 'Featured Product Deleted Successfully');
+    }
 }

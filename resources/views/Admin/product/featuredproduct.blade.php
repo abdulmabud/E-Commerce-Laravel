@@ -34,9 +34,16 @@
         <tr>
             <td>{{ $product->product->id }}</td>
             <td>{{ $product->product->name }}</td>
-            <td>BDT {{ $product->product->regular_price }} <del class="ml-3">BDT  {{ $product->product->sale_price }}</del> </td>
+            <td><del class="ml-3">BDT  {{ $product->product->sale_price }}</del> BDT {{ $product->product->regular_price }} </td>
             <td>{{ $product->product->category->name }}</td>
-            <td><a href="{{ route('product.show', $product->product->id) }}" class="btn btn-primary">Details</a></td>
+            <td><a href="{{ route('product.show', $product->product->id) }}" class="btn btn-primary">Details</a>
+            <form action="{{ route('fproduct.delete', $product->id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Remove" class="btn btn-danger">
+            </form>
+            
+            </td>
         </tr>
         @endforeach
        
@@ -48,9 +55,7 @@
     <script>
         $('.addfproductbox').css('display', 'none');
         $('.addfproductBtn').click(function(){
-            $('.addfproductbox').css('display', 'block');
-            console.log('clikci');
-            
+            $('.addfproductbox').css('display', 'block'); 
         });
         
     </script>
