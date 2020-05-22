@@ -30,3 +30,23 @@
             </div>
         </div>
 @endsection
+
+@section('customjs')
+    <script>
+      $('.addtocart').click(function(){
+        var productId = this.dataset.productid;
+        var thisBtn = this;
+        $.ajax({
+          url: '{{ route('cart.add') }}',
+          method: 'POST',
+          data: {productId: productId, _token: '{{ csrf_token() }}' },
+          cache: false,
+          success: function(data){
+            if(data == 'Successfully'){
+              $(thisBtn).html('View Cart');
+            }
+          }
+        });
+      });
+    </script>
+@endsection
