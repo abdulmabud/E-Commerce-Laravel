@@ -99,6 +99,7 @@
 @section('customjs')
     <script>
       var cartaddurl ="{{ route('cart.add') }}";
+      var cartupdateurl ="{{ route('cart.update') }}";
       var csrf = '{{ csrf_token() }}';
     </script>
 @endsection

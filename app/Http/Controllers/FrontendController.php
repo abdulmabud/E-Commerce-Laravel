@@ -61,7 +61,26 @@ class FrontendController extends Controller
     //    $data['products'] = $cart;
     //    return redirect()->route('cart.show')->with('success', 'Product added in cart Successfully');
         return "Successfully";
-}
+    }
+
+    public function cartUpdate(Request $request){
+        $btn = $request->btn;
+        $productId = $request->productId;
+        $cart = $request->session()->get('cart');
+        $quantity = $cart['products'][$productId]['quantity'];
+
+        if($btn == 'minus-btn'){
+            if($quantity < 2){
+                $cart['products'][$productId]['quantity'] = 1;
+            }else{
+                $cart['products'][$productId]['quantity'] = $quantity - 1;
+            }
+        }elseif($btn == 'plus-btn'){
+            $cart['products'][$productId]['quantity'] = $quantity + 1;
+        }
+
+        $request->session()->put('cart', $cart);
+    }
 
      public function showCart(Request $request){
         $cart = $request->session()->get('cart');
