@@ -34,6 +34,7 @@
   <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('custom/js/jquery.min.js') }}"></script>
   <script src="{{ asset('custom/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('custom/js/custom.js') }}"></script>
 @yield('customjs')
 </body>
 
