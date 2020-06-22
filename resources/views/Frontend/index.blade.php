@@ -94,6 +94,10 @@
     <!-- /.row -->
 
   </div>
+ @php
+
+     $carts= json_encode($cartarr);
+ @endphp
 @endsection
 
 @section('customjs')
@@ -101,5 +105,9 @@
       var cartaddurl ="{{ route('cart.add') }}";
       var cartupdateurl ="{{ route('cart.update') }}";
       var csrf = '{{ csrf_token() }}';
+      var cart = <?php echo $carts; ?>;
+      console.log(cart['products']);
+      
+  
     </script>
 @endsection

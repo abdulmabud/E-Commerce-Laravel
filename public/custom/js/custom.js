@@ -1,8 +1,12 @@
 $('.addtocart').click(function(){
     var productId = this.dataset.productid;
     var thisBtn = this;
-    console.log(cartaddurl);
-    
+    if(cart['products']){
+      var quantity = cart['products'][productId]['quantity'] + 1;
+      var qhtml = '<h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = '+productId+'>-</button> <input type="text" value="'+quantity+'" id="q'+productId+'" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="'+productId+'">+</button> </h5>';
+    }else{
+      var qhtml = '<h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = '+productId+'>-</button> <input type="text" value="1" id="q'+productId+'" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="'+productId+'">+</button> </h5>';
+    }
     $.ajax({
       url: cartaddurl,
       method: 'POST',
@@ -10,7 +14,7 @@ $('.addtocart').click(function(){
       cache: false,
       success: function(data){
         if(data == 'Successfully'){
-          $(thisBtn).parent().html('<h5 class="text-center"><button class="minus-btn" data-productid='+productId+'>-</button><input type="text" value="1"  class="text-center" style="width: 60px;"><button class="plus-btn" data-productid='+productId+'>+</button></h5>');
+          $(thisBtn).parent().html(qhtml);
           run();
         }
       }
@@ -20,7 +24,7 @@ $('.addtocart').click(function(){
   run();
   function run(){
     $('.minus-btn').click(function(){
-      var productId = this.dataset.productid;
+      var productId = this.dataset.minusbtn;
       var btn = 'minus-btn';
       $.ajax({
         url: cartupdateurl,
@@ -37,8 +41,8 @@ $('.addtocart').click(function(){
     });
 
     $('.plus-btn').click(function(){
-      var productId = this.dataset.productid;
-      console.log('productId');
+      var productId = this.dataset.plusbtn;
+      console.log(productId);
       
       var btn = 'plus-btn';
       $.ajax({
