@@ -10,7 +10,7 @@ $('.addtocart').click(function(){
       cache: false,
       success: function(data){
         if(data == 'Successfully'){
-          $(thisBtn).html('View Cart');
+          $(thisBtn).parent().html('<h5 class="text-center"><button>-</button><input type="text" value="1"  class="text-center" style="width: 60px;"><button>+</button></h5>');
         }
       }
     });
