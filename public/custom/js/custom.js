@@ -1,7 +1,11 @@
 $('.addtocart').click(function(){
     var productId = this.dataset.productid;
     var thisBtn = this;
-    if(cart['products']){
+    // console.log(cart['products'][productId]['quantity']);
+    console.log(productId);
+    
+
+    if(cart['products'][productId]){
       var quantity = cart['products'][productId]['quantity'] + 1;
       var qhtml = '<h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = '+productId+'>-</button> <input type="text" value="'+quantity+'" id="q'+productId+'" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="'+productId+'">+</button> </h5>';
     }else{
@@ -26,15 +30,19 @@ $('.addtocart').click(function(){
     $('.minus-btn').click(function(){
       var productId = this.dataset.minusbtn;
       var btn = 'minus-btn';
+      var quantity = $('#q'+productId).val();
       $.ajax({
         url: cartupdateurl,
         method: 'POST',
         data: {productId: productId, btn: btn, _token: csrf },
         cache: false,
         success: function(data){
-          if(data == 'Successfully'){
-           
-          }
+            if(quantity < 2){
+              quantity = 1;
+            }else{
+              quantity = quantity - 1;
+            }
+            $('#q'+productId).val(quantity);
         }
       });
       
@@ -42,18 +50,16 @@ $('.addtocart').click(function(){
 
     $('.plus-btn').click(function(){
       var productId = this.dataset.plusbtn;
-      console.log(productId);
-      
       var btn = 'plus-btn';
+      var quantity = $('#q'+productId).val();
       $.ajax({
         url: cartupdateurl,
         method: 'POST',
         data: {productId: productId, btn: btn, _token: csrf },
         cache: false,
         success: function(data){
-          if(data == 'Successfully'){
-           
-          }
+          quantity = parseInt(quantity) + 1;
+          $('#q'+productId).val(quantity);
         }
       });
       

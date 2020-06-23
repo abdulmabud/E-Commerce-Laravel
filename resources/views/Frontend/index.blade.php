@@ -106,7 +106,6 @@
       var cartupdateurl ="{{ route('cart.update') }}";
       var csrf = '{{ csrf_token() }}';
       var cart = <?php echo $carts; ?>;
-      console.log(cart['products']);
       
   
     </script>
