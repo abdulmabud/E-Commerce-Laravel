@@ -45,6 +45,7 @@ class FrontendController extends Controller
         $cart = $request->session()->get('cart');
         if($cart == null){
             $cart['products'][$productId] = [
+                'id' => $productId,
                 'name' => $product->name,
                 'quantity' => 1,
                 'price' => $product->sale_price
@@ -54,6 +55,7 @@ class FrontendController extends Controller
                 $cart['products'][$productId]['quantity'] += 1;
             }else{
                 $cart['products'][$productId] = [
+                    'id' => $productId,
                     'name' => $product->name,
                     'quantity' => 1,
                     'price' => $product->sale_price
@@ -92,12 +94,25 @@ class FrontendController extends Controller
 
      public function showCart(Request $request){
         $cart = $request->session()->get('cart');
+        // unset($cart['products'][4]);
+        $request->session()->put('cart', $cart);
         if($cart == null){
             return view('frontend.cartnoitem');
         }else{
             return view('frontend.cart', $cart);
         }
          
+     }
+
+     public function removeItem(Request $request){
+         $productId = $request->productId;
+         $cart = $request->session()->get('cart');
+         if(array_key_exists($productId, $cart['products'])){
+             unset($cart['products'][$productId]);
+             $request->session()->put('cart', $cart);
+             return view('frontend.inc.content.removecartitem', $cart);
+         }
+
      }
 
     public function checkout(Request $request){

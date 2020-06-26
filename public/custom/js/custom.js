@@ -65,4 +65,6 @@ $('.addtocart').click(function(){
       
     });
   }
+
+  
   

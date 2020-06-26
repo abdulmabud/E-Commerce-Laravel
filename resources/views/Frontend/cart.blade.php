@@ -7,19 +7,22 @@
 @section('content')
     <div class="container">
         <h2 class="text-center text-primary">Cart Item List</h2>
-        <table class="table table-bordered text-center">
+        <table class="table table-bordered text-center" id="cartTable">
             <tr>
                 <th class="text-left">Product Name</th>
                 <th>Unit Price</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
+  
             @foreach ($products as $product)
             <tr>
             <td class="text-left">{{ $product['name'] }}</td>
                 <td>BDT {{ $product['price'] }}</td>
                 <td class="text-center">{{ $product['quantity'] }}</td>
                 <td class="text-right pr-5" style="width: 15%;">BDT <span class="price">{{ $product['price'] * $product['quantity'] }}</span> </td>
+            <td><button class="btn btn-danger removeBtn" data-productid="{{ $product['id'] }}" >Remove</button></td>
             </tr>
             @endforeach
             
@@ -47,7 +50,30 @@
 
 @section('customjs')
     <script>
-    var sum = 0;
+        var removecartitemurl = "{{ route('cart.removeitem') }}";
+        var csrf = '{{ csrf_token() }}';
+        // remove item from cart
+        removeCart();
+       function removeCart(){
+        $('.removeBtn').click(function(){
+            var product_id = this.dataset.productid;
+            console.log(product_id);
+            $.ajax({
+                url: removecartitemurl,
+                method: 'POST',
+                data: {productId: product_id, _token: csrf},
+                cache: false,
+                success: function(data){
+                 $('#cartTable').html(data);
+                  updatePrice();
+                }
+            }); 
+        })
+       }
+        updatePrice();
+        //update cart page price
+        function updatePrice(){
+        var sum = 0;
         $('.price').each(function(){
             sum += parseFloat($(this).text());  // Or this.innerHTML, this.innerText
         });
@@ -57,7 +83,8 @@
         totalPrice = totalPrice.toFixed(2);
         sum = sum.toFixed(2);
         $('.subTotal').text(sum);
-        $('.totalPrice').text(totalPrice); 
+        $('.totalPrice').text(totalPrice);
+        } 
     </script>
 
 @endsection
