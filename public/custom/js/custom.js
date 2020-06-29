@@ -1,12 +1,12 @@
 $('.addtocart').click(function(){
     var productId = this.dataset.productid;
     var thisBtn = this;
-    // console.log(cart['products'][productId]['quantity']);
-    console.log(productId);
-    
-
-    if(cart['products'][productId]){
-      var quantity = cart['products'][productId]['quantity'] + 1;
+    if(cart.length != 0){
+      if(cart['products'][productId]){
+        var quantity = cart['products'][productId]['quantity'] + 1;
+      }else{
+        var quantity = 1; 
+      }
       var qhtml = '<h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = '+productId+'>-</button> <input type="text" value="'+quantity+'" id="q'+productId+'" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="'+productId+'">+</button> </h5>';
     }else{
       var qhtml = '<h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = '+productId+'>-</button> <input type="text" value="1" id="q'+productId+'" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="'+productId+'">+</button> </h5>';
