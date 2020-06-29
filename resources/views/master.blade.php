@@ -15,6 +15,7 @@
 
   <!-- Custom styles for this template -->
 <link href="{{ asset('custom/css/shop-homepage.css') }}" rel="stylesheet">
+<link href="{{ asset('custom/css/custom.css') }}" rel="stylesheet">
 @yield('customcss')
 </head>
 

@@ -40,3 +40,11 @@ Route::get('admin/featuredproduct', 'ProductController@featuredproduct')->name('
 Route::post('admin/add-featured-product', 'ProductController@addfproduct')->name('addfproduct');
 Route::get('admin/add-featured-product/{id}', 'ProductController@savefproduct')->name('savefproduct');
 Route::delete('admin/fproductdelete/{id}', 'ProductController@fproductdelete')->name('fproduct.delete');
+
+
+Route::get('profile', function () {
+    // Only authenticated users may enter...
+})->middleware('auth.basic');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
