@@ -8,6 +8,7 @@ use App\FeaturedProduct;
 use App\Category;
 use App\Order;
 use App\OrderItem;
+use Auth;
 use Validator;
 
 class FrontendController extends Controller
@@ -137,8 +138,13 @@ class FrontendController extends Controller
         }else{
             $lastOrderId = $lastOrderId->id + 1;
         }
-        
+
         $orderObj = new Order;
+        if(Auth::check()){
+            $user_id = Auth::user()->id;
+            $orderObj->user_id = $user_id;
+        }
+    
         $orderObj->user_name = $request->name;
         $orderObj->user_phone = $request->phone;
         $orderObj->user_email = $request->email;

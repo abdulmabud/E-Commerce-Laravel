@@ -24,6 +24,9 @@ Route::get('/checkout', 'FrontendController@checkout')->name('checkout');
 Route::post('/order','FrontendController@store')->name('order.store');
 
 
+//UserController
+Route::get('/my-account', 'UserController@account')->name('myaccount');
+
 // admin area
 
 Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
@@ -46,5 +49,3 @@ Route::get('profile', function () {
     // Only authenticated users may enter...
 })->middleware('auth.basic');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
