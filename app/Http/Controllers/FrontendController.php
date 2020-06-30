@@ -116,6 +116,17 @@ class FrontendController extends Controller
 
      }
 
+     public function cartitemcount(Request $request){
+        $cartitems = $request->session()->get('cart');
+        $cartcount = 0;
+        if($cartitems){
+            foreach($cartitems['products'] as $cartitem){
+                $cartcount = $cartcount + $cartitem['quantity'];
+            }
+        }
+        return $cartcount;
+     }
+
     public function checkout(Request $request){
         $cart = $request->session()->get('cart');
         return view('frontend.checkout', $cart);

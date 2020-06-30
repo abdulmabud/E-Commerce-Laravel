@@ -2,3 +2,10 @@
     margin-top: 10%;
     margin-bottom: 10%;
 }
+
+#countCart{
+    padding: 2px 3px;
+    background-color: red;
+    border-radius: 30%;
+    color: white;
+}

@@ -20,6 +20,7 @@ $('.addtocart').click(function(){
         if(data == 'Successfully'){
           $(thisBtn).parent().html(qhtml);
           run();
+          cartitemcount();
         }
       }
     });
@@ -43,6 +44,7 @@ $('.addtocart').click(function(){
               quantity = quantity - 1;
             }
             $('#q'+productId).val(quantity);
+            cartitemcount();
         }
       });
       
@@ -60,11 +62,27 @@ $('.addtocart').click(function(){
         success: function(data){
           quantity = parseInt(quantity) + 1;
           $('#q'+productId).val(quantity);
+          cartitemcount();
         }
       });
       
     });
   }
 
-  
+  // cart item count
+  cartitemcount();
+  function cartitemcount(){
+    
+    
+    $.ajax({
+      url: cartitemcounturl,
+      method: 'POST',
+      data: { _token: csrf },
+      cache: false,
+      success: function(data){
+        console.log(data);
+          $('#countCart').html(data);
+      }
+    })
+  }
   

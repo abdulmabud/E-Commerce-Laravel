@@ -19,6 +19,9 @@ Route::post('/cart', 'FrontendController@cartAdd')->name('cart.add');
 Route::post('/cartupdate', 'FrontendController@cartUpdate')->name('cart.update');
 Route::get('/cart', 'FrontendController@showCart')->name('cart.show');
 Route::post('/cartitemremove', 'FrontendController@removeItem')->name('cart.removeitem');
+Route::post('/cartitemcount', 'FrontendController@cartitemcount')->name('cart.count');
+
+
 Route::get('/checkout', 'FrontendController@checkout')->name('checkout');
 
 Route::post('/order','FrontendController@store')->name('order.store');

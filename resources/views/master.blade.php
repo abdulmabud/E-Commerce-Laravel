@@ -35,6 +35,10 @@
   <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('custom/js/jquery.min.js') }}"></script>
   <script src="{{ asset('custom/js/bootstrap.bundle.min.js') }}"></script>
+  <script>
+    var cartitemcounturl = "{{ route('cart.count') }}";
+    var csrf = '{{ csrf_token() }}';
+  </script>
   <script src="{{ asset('custom/js/custom.js') }}"></script>
 @yield('customjs')
 </body>
