@@ -62,6 +62,7 @@ class ProductController extends Controller
         $productObj->category_id = $request->category_id;
         $productObj->status = $request->status;
         $productObj->save();
+        $insert_id = $productObj->id;
 
         if($request->hasFile('thumbnail_image')){
             $productImageObj = new ProductImage();
@@ -71,7 +72,7 @@ class ProductController extends Controller
             $image->move($path, $name);
             $productImageObj->image = $name;
             $productImageObj->thumbnail_image = 1;
-            $productImageObj->product_id = 1;
+            $productImageObj->product_id = $insert_id;
             $productImageObj->save();
         } 
 
@@ -84,7 +85,7 @@ class ProductController extends Controller
                 $image->move($path, $name);
                 $productImageObj->image = $name;
                 $productImageObj->thumbnail_image = 0;
-                $productImageObj->product_id = 1;
+                $productImageObj->product_id = $insert_id;
                 $productImageObj->save();
             }
            
