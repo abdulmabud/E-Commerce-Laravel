@@ -48,8 +48,8 @@
                 <h4 class="card-title">
                   <a href="{{ route('product.details', $product->product->id) }}">{{  $product->product->name   }}</a>
                 </h4>
-                <h5 class="d-inline"><del>BDT {{ $product->product->sale_price }}</del></h5>
-                <h5 class="d-inline">BDT {{ $product->product->regular_price }}</h5>
+                <h5 class="d-inline"><del>BDT {{ $product->product->regular_price }}</del></h5>
+                <h5 class="d-inline">BDT {{ $product->product->sale_price }}</h5>
               </div>
               <div class="card-footer">
                 <input type="hidden" value="{{ $product->product->id }}" id="productId">

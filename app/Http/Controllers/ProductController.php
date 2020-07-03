@@ -74,7 +74,13 @@ class ProductController extends Controller
             $productImageObj->thumbnail_image = 1;
             $productImageObj->product_id = $insert_id;
             $productImageObj->save();
-        } 
+        }else{
+            $productImageObj = new ProductImage();
+            $productImageObj->image = 'noImage.png';
+            $productImageObj->thumbnail_image = 1;
+            $productImageObj->product_id = $insert_id;
+            $productImageObj->save();
+        }
 
         if($request->hasFile('image')){
             $images = $request->file('image');
@@ -144,7 +150,7 @@ class ProductController extends Controller
         }
         
         $productObj = Product::find($id);
-        
+        // dd($productObj);
         $productObj->name = $request->name;
         $productObj->regular_price = $request->regular_price;
         $productObj->sale_price = $request->sale_price;
@@ -153,31 +159,15 @@ class ProductController extends Controller
         $productObj->save();
 
         if($request->hasFile('thumbnail_image')){
-            $productImageObj = ProductImage::where('product_id', '$id');
+            $productImageObj = ProductImage::where(['product_id' => $id, 'thumbnail_image' => 1])->first();
             $image = $request->file('thumbnail_image');
             $name = time().'.'.$image->getClientOriginalExtension();
             $path = public_path('upload/product/image');
             $image->move($path, $name);
             $productImageObj->image = $name;
-            $productImageObj->thumbnail_image = 1;
-            $productImageObj->product_id = 1;
             $productImageObj->save();
         } 
 
-        if($request->hasFile('image')){
-            $images = $request->file('image');
-            foreach($images as $image){
-                $productImageObj = ProductImage::where('product_id', '$id');
-                $name = time().rand(100, 999).'.'.$image->getClientOriginalExtension();
-                $path = public_path('upload/product/image');
-                $image->move($path, $name);
-                $productImageObj->image = $name;
-                $productImageObj->thumbnail_image = 0;
-                $productImageObj->product_id = 1;
-                $productImageObj->save();
-            }
-           
-        } 
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');
 

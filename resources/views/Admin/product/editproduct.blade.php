@@ -38,10 +38,10 @@
                     <td>Thumbnail Image</td>
                     <td><input type="file" name="thumbnail_image"></td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td>Image</td>
                     <td><input type="file" name="image[]" multiple></td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td>Status</td>
                     <td>
