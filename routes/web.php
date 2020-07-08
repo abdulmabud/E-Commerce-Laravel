@@ -29,6 +29,7 @@ Route::post('/order','FrontendController@store')->name('order.store');
 
 //UserController
 Route::get('/my-account', 'UserController@account')->name('myaccount');
+Route::get('/my-account/order/{id}', 'UserController@orderdetails')->name('myaccount.orderdetails');
 
 // admin area
 

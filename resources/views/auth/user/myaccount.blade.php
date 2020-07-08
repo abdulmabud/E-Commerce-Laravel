@@ -43,7 +43,7 @@
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->id }}</td>
                     <td>BDT {{ number_format($order->subtotal+$order->delivery_charge, 2) }}</td>
-                    <td><button class="btn btn-primary">Details</button></td>
+                    <td><a href="{{ route('myaccount.orderdetails', $order->id) }}"><button class="btn btn-primary">Details</button></a></td>
                 </tr> 
                 @endforeach
             </tbody>
