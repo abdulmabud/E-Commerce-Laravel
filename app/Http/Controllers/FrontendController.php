@@ -27,8 +27,15 @@ class FrontendController extends Controller
         return view('frontend.index', $data);
     }
 
-    public function productDetail($productId){
+    public function productDetail(Request $request, $productId){
         $data['product'] = Product::with('productimages')->where('id', $productId)->first();
+        $cartarr = $request->session()->get('cart');
+        // dd($cart);
+        if($cartarr == null){
+            $data['cartarr'] = [];
+        }else{
+            $data['cartarr'] = $cartarr;
+        }
         return view('frontend.productdetails', $data);
     }
 

@@ -19,12 +19,16 @@
                 <h2>{{ $product->name }}</h2>
                 <h5>BDT {{ $product->regular_price }}</h5>
                 <h5>BDT <del> {{ $product->sale_price }} </del> </h5>
-                <h5>
+                {{-- <h5>
                     <button>-</button>
                     <input type="text" value="1" class="text-center" style="width: 60px;"> 
                     <button>+</button>
-                </h5>
-                <button class="btn btn-primary">Add to Cart</button>
+                </h5> --}}
+                {{-- <button class="btn btn-primary">Add to Cart</button> --}}
+               <div>
+                    <input type="hidden" value="{{ $product->id }}" id="productId">
+                    <button data-productid="{{ $product->id }}" class="btn btn-primary btn-block addtocart w-75 m-auto">Add to Cart</button>
+               </div>
                 <hr>
                 <p>Category: <span>Science</span></p>
                 <p>Description: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus facilis tempora placeat eaque nulla laborum reprehenderit distinctio eveniet perferendis?</p>
@@ -47,6 +51,9 @@
             </div>
         </div>
     </div>
+    @php
+         $carts= json_encode($cartarr);
+    @endphp
 @endsection
 
 @section('customjs')
@@ -54,5 +61,10 @@
         $('.simage').click(function(){
            $('#Limage').attr('src', this.src);
         });
+       
+        var cartaddurl ="{{ route('cart.add') }}";
+        var cartupdateurl ="{{ route('cart.update') }}";
+        var csrf = '{{ csrf_token() }}';
+        var cart = <?php echo $carts; ?>;
     </script>
 @endsection

@@ -94,7 +94,6 @@
 
   </div>
  @php
-
      $carts= json_encode($cartarr);
  @endphp
 @endsection
@@ -105,7 +104,6 @@
       var cartupdateurl ="{{ route('cart.update') }}";
       var csrf = '{{ csrf_token() }}';
       var cart = <?php echo $carts; ?>;
-      
   
     </script>
 @endsection
