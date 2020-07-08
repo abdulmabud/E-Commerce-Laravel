@@ -10,6 +10,9 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function account(){
         $user_id = Auth::user()->id;
         $data['user'] = User::where('id', $user_id)->first();
@@ -20,11 +23,7 @@ class UserController extends Controller
     public function orderdetails(Request $request){
         $order_id = $request->id;
         $data['order'] = Order::find($order_id)->first();
-        if(Auth::check()){
-            $user_id = Auth::user()->id;
-        }else{
-            $user_id = 0;
-        }
+        $user_id = Auth::user()->id;
         if($data['order']['user_id'] != $user_id){
             abort(404);
         }           
