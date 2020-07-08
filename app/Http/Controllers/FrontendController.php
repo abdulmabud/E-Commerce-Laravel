@@ -15,9 +15,9 @@ class FrontendController extends Controller
 {
     public function index(Request $request){
         $data['products'] = Product::with('productimages')->where('status', 1)->get();
-        $data['fproducts'] = FeaturedProduct::with('product')->select('product_id')->take(8)->get();
+        $data['fproducts'] = FeaturedProduct::with('product', 'product.productimages')->select('product_id')->take(8)->get();
         $cartarr = $request->session()->get('cart');
-        // dd($cart);
+        // dd($data);
         if($cartarr == null){
             $data['cartarr'] = [];
         }else{
