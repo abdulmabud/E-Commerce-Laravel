@@ -8,12 +8,12 @@
     <div class="container">
         <div class="row mb-5" style="box-sizing: border-box;">
             <div class="col-md-1">
-                <img src="http://placehold.it/100x100" alt=""> <hr>
-                <img src="http://placehold.it/100x100" alt=""> <hr>
-                <img src="http://placehold.it/100x100" alt="">
+                @foreach ($product->productimages as $item)
+                  <img src="{{ asset('upload/product/image/'.$item->image) }}" alt="" class="simage" width="100%"> <hr>
+                @endforeach
             </div>
             <div class="col-md-4 ml-3">
-                <img src="http://placehold.it/350x350" alt="">
+                <img src="{{ asset('upload/product/image/'.$product->productimages[0]->image) }}" alt="" width="100%" id="Limage">
             </div>
             <div class="col-md-4 mr-4">
                 <h2>{{ $product->name }}</h2>
@@ -47,4 +47,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('customjs')
+    <script>
+        $('.simage').click(function(){
+           $('#Limage').attr('src', this.src);
+        });
+    </script>
 @endsection

@@ -28,8 +28,7 @@ class FrontendController extends Controller
     }
 
     public function productDetail($productId){
-        $data['product'] = Product::find($productId)->first();
-
+        $data['product'] = Product::with('productimages')->where('id', $productId)->first();
         return view('frontend.productdetails', $data);
     }
 
