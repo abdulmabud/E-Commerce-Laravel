@@ -6,5 +6,6 @@
     <a href="{{ route('product.index') }}" class="list-group-item list-group-item-action bg-light">Product</a>
     <a href="{{ route('featuredproduct.index') }}" class="list-group-item list-group-item-action bg-light">Featured Product</a>
       <a href="{{ route('category.index') }}" class="list-group-item list-group-item-action bg-light">Category</a>
+      <a href="{{ route('setting.index') }}" class="list-group-item list-group-item-action bg-light">Setting</a>
     </div>
   </div>

@@ -49,6 +49,12 @@ Route::get('admin/add-featured-product/{id}', 'ProductController@savefproduct')-
 Route::delete('admin/fproductdelete/{id}', 'ProductController@fproductdelete')->name('fproduct.delete');
 
 
+//SettingController
+
+Route::get('/setting', 'SettingController@index')->name('setting.index');
+Route::post('/setting/deliverycharge', 'SettingController@dCharge')->name('setting.delivery.charge');
+
+// test code
 Route::get('profile', function () {
     // Only authenticated users may enter...
 })->middleware('auth.basic');
