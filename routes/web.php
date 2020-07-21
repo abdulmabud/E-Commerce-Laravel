@@ -33,7 +33,7 @@ Route::get('/my-account/order/{id}', 'UserController@orderdetails')->name('myacc
 
 // admin area
 
-Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
+Route::get('/admin', 'AdminController@index')->name('admin.dashboard')->middleware('isadmin');
 Route::get('/admin/order', 'AdminController@order')->name('admin.order');
 Route::get('/admin/order/{id}', 'AdminController@orderDetails')->name('admin.order.details');
 
