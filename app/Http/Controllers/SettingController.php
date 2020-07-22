@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Setting;
 use Validator;
+use Image;
 
 class SettingController extends Controller
 {
@@ -49,10 +50,13 @@ class SettingController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         if($request->hasFile('slider')){
-            $image = $request->slider;
+            $image = $request->file('slider');
             $name = time().'.'.$image->getClientOriginalExtension();
-            $path = public_path('upload/slider');
-            $image->move($path, $name);
+            // $path = public_path('upload/slider');
+            $image_resize = Image::make($image->getRealPath());              
+            $image_resize->resize(1200, 350);
+            $image_resize->save(public_path('upload/slider/' .$name));
+            // $image->move($path, $name);
             $settingObj = new Setting();
             $settingObj->meta_key = 'slider_image';
             $settingObj->meta_value = $name;
