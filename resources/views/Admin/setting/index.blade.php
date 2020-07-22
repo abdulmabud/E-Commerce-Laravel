@@ -15,6 +15,7 @@
         </table>
         <h4 class="text-primary" id="dresult"></h4>
         <hr>
+        <a href="{{ route('slider.update') }}" class="btn btn-primary">Update Slider Setting</a>
     </div>
 @endsection
 

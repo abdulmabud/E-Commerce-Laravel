@@ -53,6 +53,10 @@ Route::delete('admin/fproductdelete/{id}', 'ProductController@fproductdelete')->
 
 Route::get('/setting', 'SettingController@index')->name('setting.index');
 Route::post('/setting/deliverycharge', 'SettingController@dCharge')->name('setting.delivery.charge');
+Route::get('/setting/update-slider', 'SettingController@updateSlider')->name('slider.update');
+Route::post('/setting/update-slider/add', 'SettingController@storeSlider')->name('slider.store');
+Route::delete('/setting/update-slider/delete/{id}', 'SettingController@destroySlider')->name('slider.remove');
+
 
 // test code
 Route::get('profile', function () {

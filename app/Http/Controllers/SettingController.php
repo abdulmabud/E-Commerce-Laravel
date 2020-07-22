@@ -34,7 +34,36 @@ class SettingController extends Controller
             $dObj->remarks = 'null';
             $dObj->save();
         }
-        
+    }
 
+    public function updateSlider(){
+        $data['slider_images'] = Setting::select('id', 'meta_value')->where('meta_key', 'slider_image')->get();
+        return view('admin.setting.updateslider', $data);
+    }
+
+    public function storeSlider(Request $request){
+        $validator = Validator::make($request->all(),[
+            'slider' => 'required'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        if($request->hasFile('slider')){
+            $image = $request->slider;
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $path = public_path('upload/slider');
+            $image->move($path, $name);
+            $settingObj = new Setting();
+            $settingObj->meta_key = 'slider_image';
+            $settingObj->meta_value = $name;
+            $settingObj->remarks = 'Homepage Slider Image';
+            $settingObj->save();
+            return redirect()->route('slider.update')->with('success', 'Slider Added Successfully');
+        }
+    }
+
+    public function destroySlider($id){
+        Setting::find($id)->delete();
+        return redirect()->route('slider.update')->with('success', 'Slider Deleted Successfully');
     }
 }
