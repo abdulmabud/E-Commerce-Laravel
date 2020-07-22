@@ -17,6 +17,8 @@ class FrontendController extends Controller
     public function index(Request $request){
         $data['products'] = Product::with('productimages')->where('status', 1)->get();
         $data['fproducts'] = FeaturedProduct::with('product', 'product.productimages')->select('product_id')->take(8)->get();
+        $data['slider_images'] = Setting::select('meta_value')->where('meta_key', 'slider_image')->get();
+        $data['active'] = 1;
         $cartarr = $request->session()->get('cart');
         // dd($data);
         if($cartarr == null){

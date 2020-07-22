@@ -52,6 +52,7 @@
                         <td><input type="submit" value="Upload New Slider Image" class="btn btn-primary"></td>
                     </tr>
                 </table>
+                <h6 class="text-center text-danger">* Image size must be 1200*350px</h6>
             </form>
            </div>
        </div>

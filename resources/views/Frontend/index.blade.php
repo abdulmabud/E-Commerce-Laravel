@@ -19,15 +19,12 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           </ol>
           <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/1200x350" alt="First slide">
+            @foreach ($slider_images as $image)
+          <div class="carousel-item {{ $active == 1 ? 'active':'' }}">
+              <img class="d-block img-fluid" src="{{ asset('upload/slider/'.$image->meta_value) }}" alt="First slide">
             </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/1200x350" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/1200x350" alt="Third slide">
-            </div>
+            {{ $active = 2 }}
+            @endforeach
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
