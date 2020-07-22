@@ -16,6 +16,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware('isadmin');
+    }
+    
     public function index()
     {
         $data['products'] = Product::with('category')->orderBy('id', 'desc')->get();

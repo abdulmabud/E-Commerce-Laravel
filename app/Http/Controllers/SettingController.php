@@ -9,6 +9,11 @@ use Image;
 
 class SettingController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('isadmin');
+    }
+    
     public function index(){
         $data['delivery_charge'] = Setting::select('meta_value')->where('meta_key', 'Delivery Charge')->first();
         if(!$data['delivery_charge']){
