@@ -13,7 +13,13 @@
                 @endforeach
             </div>
             <div class="col-md-4 ml-3">
+                @php
+                    if($product->productimages->count() != 0):
+                @endphp 
                 <img src="{{ asset('upload/product/image/'.$product->productimages[0]->image) }}" alt="" width="100%" id="Limage">
+                @php
+                    endif;
+                @endphp
             </div>
             <div class="col-md-4 mr-4">
                 <h2>{{ $product->name }}</h2>

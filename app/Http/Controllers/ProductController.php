@@ -165,6 +165,11 @@ class ProductController extends Controller
 
         if($request->hasFile('thumbnail_image')){
             $productImageObj = ProductImage::where(['product_id' => $id, 'thumbnail_image' => 1])->first();
+            if($productImageObj == null){
+                $id = $productObj->id;
+                $productImageObj = new ProductImage();
+                $productImageObj->product_id = $id;
+            }
             $image = $request->file('thumbnail_image');
             $name = time().'.'.$image->getClientOriginalExtension();
             $path = public_path('upload/product/image');

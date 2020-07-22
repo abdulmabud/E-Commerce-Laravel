@@ -35,12 +35,16 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <h2>Featured Product</h2>
+        @php
+            if($fproducts->count() != 0){
+              echo '<h2>Featured Product</h2>';
+            }
+        @endphp
         <div class="row">
           @foreach ($fproducts as $product)
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="{{  count($product->product->productimages) > 0 ?  asset('/upload/product/image/'.$product->product->productimages[0]->image) : asset('/upload/product/image/noImage.PNG') }}" alt=""></a>
+              <a href="{{ route('product.details', $product->product->id) }}"><img class="card-img-top" src="{{  count($product->product->productimages) > 0 ?  asset('/upload/product/image/'.$product->product->productimages[0]->image) : asset('/upload/product/image/noImage.PNG') }}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="{{ route('product.details', $product->product->id) }}">{{  $product->product->name   }}</a>
@@ -63,7 +67,7 @@
           @foreach ($products as $product)
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="{{  count($product->productimages) > 0 ?  asset('/upload/product/image/'.$product->productimages[0]->image) : asset('/upload/product/image/noImage.PNG') }}" alt=""></a>
+              <a href="{{ route('product.details', $product->id) }}"><img class="card-img-top" src="{{  count($product->productimages) > 0 ?  asset('/upload/product/image/'.$product->productimages[0]->image) : asset('/upload/product/image/noImage.PNG') }}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="{{ route('product.details', $product->id) }}">{{  $product->name   }}</a>
