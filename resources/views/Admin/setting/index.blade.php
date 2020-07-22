@@ -14,6 +14,7 @@
             </tr>
         </table>
         <h4 class="text-primary" id="dresult"></h4>
+        <hr>
     </div>
 @endsection
 

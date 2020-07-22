@@ -34,7 +34,7 @@
             </tr>
             <tr>
                 <td>Delivery Charge</td>
-                <td class="text-right pr-3">BDT <span class="deliveryCharge">50.00</span> </td>
+                <td class="text-right pr-3">BDT <span class="deliveryCharge">{{ number_format($delivery_charge->meta_value, 2) }}</span> </td>
             </tr>
             <tr>
                 <td>Total Price</td>

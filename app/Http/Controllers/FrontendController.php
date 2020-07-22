@@ -8,6 +8,7 @@ use App\FeaturedProduct;
 use App\Category;
 use App\Order;
 use App\OrderItem;
+use App\Setting;
 use Auth;
 use Validator;
 
@@ -106,6 +107,7 @@ class FrontendController extends Controller
         if($cart == null){
             return view('frontend.cartnoitem');
         }else{
+            $cart['delivery_charge'] = Setting::select('meta_value')->where('meta_key', 'Delivery Charge')->first();
             return view('frontend.cart', $cart);
         }
          
@@ -135,6 +137,7 @@ class FrontendController extends Controller
 
     public function checkout(Request $request){
         $cart = $request->session()->get('cart');
+        $cart['delivery_charge'] = Setting::select('meta_value')->where('meta_key', 'Delivery Charge')->first();
         return view('frontend.checkout', $cart);
     }
 
