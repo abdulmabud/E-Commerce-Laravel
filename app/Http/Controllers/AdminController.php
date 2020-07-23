@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\OrderItem;
 use App\OrderStatus;
+use App\Contact;
 use Validator;
 
 class AdminController extends Controller
@@ -42,5 +43,15 @@ class AdminController extends Controller
         $statusObj->status = $request->status;
         $statusObj->save();
         return 'success';
+    }
+
+    public function contact(){
+        $data['contacts'] = Contact::select('id', 'name', 'subject')->orderBy('id', 'DESC')->get();
+        return view('admin.contact.index', $data);
+    }
+
+    public function contactDetails($id){
+        $data['contact'] = Contact::find($id);
+        return view('admin.contact.contactdetails', $data);
     }
 }

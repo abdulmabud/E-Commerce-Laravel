@@ -38,6 +38,8 @@ Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 Route::get('/admin/order', 'AdminController@order')->name('admin.order');
 Route::get('/admin/order/{id}', 'AdminController@orderDetails')->name('admin.order.details');
 Route::post('/admin/status-change', 'AdminController@changeStatus')->name('order.status.change');
+Route::get('/admin/contact', 'AdminController@contact')->name('contact.index');
+Route::get('/admin/contact/{id}', 'AdminController@contactDetails')->name('contact.details');
 
 
 //ProductController 
