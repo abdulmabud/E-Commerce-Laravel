@@ -31,11 +31,12 @@ Route::post('/order','FrontendController@store')->name('order.store');
 Route::get('/my-account', 'UserController@account')->name('myaccount');
 Route::get('/my-account/order/{id}', 'UserController@orderdetails')->name('myaccount.orderdetails');
 
-// admin area
+//AdminController
 
 Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 Route::get('/admin/order', 'AdminController@order')->name('admin.order');
 Route::get('/admin/order/{id}', 'AdminController@orderDetails')->name('admin.order.details');
+Route::post('/admin/status-change', 'AdminController@changeStatus')->name('order.status.change');
 
 
 //ProductController 

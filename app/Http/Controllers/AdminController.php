@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use App\OrderItem;
+use App\OrderStatus;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -26,5 +28,21 @@ class AdminController extends Controller
         $data['orders'] = OrderItem::where('order_id', $id)->get();
       
         return view('admin.order.orderdetails', $data);
+    }
+
+    public function changeStatus(Request $request){
+        $validator = Validator::make($request->all(),[
+            'order_id' => 'required',
+            'status' => 'required',
+        ]);
+       
+        if($validator->fails()){
+            return 'failed';
+        }
+        $statusObj = new OrderStatus();
+        $statusObj->order_id = $request->order_id;
+        $statusObj->status = $request->status;
+        $statusObj->save();
+        return 'success';
     }
 }

@@ -25,6 +25,10 @@
                         <td>Address</td>
                         <td>{{ $order->address }}</td>
                     </tr>
+                    <tr>
+                        <td>Order id</td>
+                        <td>{{ $order->id }}</td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -62,5 +66,54 @@
                 </tr>
             </table>
         </div>
+        <hr>
+        <div class="orderstatus">
+            <h3 class="text-center text-primary">Change Order Status</h3>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <form action="" class="form-group" id="statusForm">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Select Order Status</td>
+                                <td>
+                                    <select id="status" class="form-control">
+                                        <option value="Pending">Pending</option>
+                                        <option value="Accepted">Accepted</option>
+                                        <option value="Assigned">Assigned</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Canceled">Canceled</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="hidden" value="{{ $order->id }}" id="order_id"></td>
+                                <td><input type="submit" value="Change Status" class="btn btn-primary"></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <h5 class="text-center text-primary" id="result"></h5>
+                </div>
+            </div>
+        </div>
+        <hr>
     </div>
+@endsection
+
+@section('customjs')
+    <script>
+        $('#statusForm').submit(function(e){
+            e.preventDefault();
+            var order_id = $('#order_id').val();
+            var status = $('#status').val();
+            $.ajax({
+                url: '{{ route('order.status.change') }}',
+                method: 'POST',
+                data: {status: status, _token: '{{ csrf_token() }}'},
+                cache: false,
+                success: function(data){
+                    $('#result').text('Status changed to '+ status);
+                }
+            });
+        });
+    </script>
 @endsection
