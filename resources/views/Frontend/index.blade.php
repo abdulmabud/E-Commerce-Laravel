@@ -23,7 +23,9 @@
           <div class="carousel-item {{ $active == 1 ? 'active':'' }}">
               <img class="d-block img-fluid" src="{{ asset('upload/slider/'.$image->meta_value) }}" alt="First slide">
             </div>
-            {{ $active = 2 }}
+            @php
+                $active = 2;
+            @endphp
             @endforeach
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
