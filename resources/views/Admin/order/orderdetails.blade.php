@@ -67,7 +67,29 @@
             </table>
         </div>
         <hr>
-        <div class="orderstatus">
+        <div class="seeorderstatus">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Time</td>
+                            <td>Status</td>
+                        </tr>
+                        @php
+                            $status = 'Pending';
+                        @endphp
+                        @foreach ($order->orderstatuses as $item)
+                            <tr>
+                                <td>{{ date_format($item->created_at, 'd-M-y h:ia') }}</td>
+                                <td>{{ $status = $item->status }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="changeorderstatus">
             <h3 class="text-center text-primary">Change Order Status</h3>
             <div class="row">
                 <div class="col-md-6 offset-md-3">
@@ -77,11 +99,11 @@
                                 <td>Select Order Status</td>
                                 <td>
                                     <select id="status" class="form-control">
-                                        <option value="Pending">Pending</option>
-                                        <option value="Accepted">Accepted</option>
-                                        <option value="Assigned">Assigned</option>
-                                        <option value="Delivered">Delivered</option>
-                                        <option value="Canceled">Canceled</option>
+                                        <option {{ $status == 'Pending'?'Selected':'' }} value="Pending">Pending</option>
+                                        <option {{ $status == 'Accepted'?'Selected':'' }} value="Accepted">Accepted</option>
+                                        <option {{ $status == 'Assigned'?'Selected':'' }} value="Assigned">Assigned</option>
+                                        <option {{ $status == 'Delivered'?'Selected':'' }} value="Delivered">Delivered</option>
+                                        <option {{ $status == 'Canceled'?'Selected':'' }} value="Canceled">Canceled</option>
                                     </select>
                                 </td>
                             </tr>
@@ -108,7 +130,7 @@
             $.ajax({
                 url: '{{ route('order.status.change') }}',
                 method: 'POST',
-                data: {status: status, _token: '{{ csrf_token() }}'},
+                data: {order_id, order_id, status: status, _token: '{{ csrf_token() }}'},
                 cache: false,
                 success: function(data){
                     $('#result').text('Status changed to '+ status);

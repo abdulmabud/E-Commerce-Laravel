@@ -24,9 +24,8 @@ class AdminController extends Controller
     }
 
     public function orderDetails($id){
-        $data['order'] = Order::find($id);
+        $data['order'] = Order::with('orderstatuses')->find($id);
         $data['orders'] = OrderItem::where('order_id', $id)->get();
-      
         return view('admin.order.orderdetails', $data);
     }
 
@@ -35,7 +34,6 @@ class AdminController extends Controller
             'order_id' => 'required',
             'status' => 'required',
         ]);
-       
         if($validator->fails()){
             return 'failed';
         }
