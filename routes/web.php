@@ -20,7 +20,8 @@ Route::post('/cartupdate', 'FrontendController@cartUpdate')->name('cart.update')
 Route::get('/cart', 'FrontendController@showCart')->name('cart.show');
 Route::post('/cartitemremove', 'FrontendController@removeItem')->name('cart.removeitem');
 Route::post('/cartitemcount', 'FrontendController@cartitemcount')->name('cart.count');
-
+Route::get('/contact', 'FrontendController@contact')->name('contact');
+Route::post('/contact', 'FrontendController@storeContact')->name('contact.store');
 
 Route::get('/checkout', 'FrontendController@checkout')->name('checkout');
 

@@ -9,6 +9,7 @@ use App\Category;
 use App\Order;
 use App\OrderItem;
 use App\Setting;
+use App\Contact;
 use Auth;
 use Validator;
 
@@ -194,5 +195,30 @@ class FrontendController extends Controller
         $request->session()->forget('cart');
         return redirect()->route('homepage')->with('success', 'Order Place Successfully');
         
+    }
+
+    public function contact(){
+        return view('frontend.contact');
+    }
+
+    public function storeContact(Request $request){
+        $validator = Validator::make($request->all() ,[
+            'name' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $contactObj = new Contact();
+        $contactObj->name = $request->name;
+        $contactObj->phone = $request->phone;
+        $contactObj->email = $request->email;
+        $contactObj->subject = $request->subject;
+        $contactObj->message = $request->message;
+        $contactObj->save();
+        return redirect()->route('contact')->with('success', 'You successfully contacted with us. We give you feedback soon!');
     }
 }
