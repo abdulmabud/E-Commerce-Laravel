@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Faq;
+use Validator;
 
 class FaqController extends Controller
 {
@@ -13,7 +15,8 @@ class FaqController extends Controller
      */
     public function index()
     {
-        //
+        $data['faqs'] = Faq::select('id', 'question', 'status')->get();
+        return view('admin.faq.index', $data);
     }
 
     /**
@@ -23,7 +26,7 @@ class FaqController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.faq.createfaq');
     }
 
     /**
@@ -34,7 +37,22 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'question' => 'required',
+            'answer' => 'required',
+            'status' => 'required'
+
+        ]);
+       
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $faqObj = new Faq();
+        $faqObj->question = $request->question;
+        $faqObj->answer = $request->answer;
+        $faqObj->status = $request->status;
+        $faqObj->save();
+        return redirect()->route('faq.index')->with('success', 'FAQ Added Successfully');
     }
 
     /**
@@ -45,7 +63,8 @@ class FaqController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['faq'] = Faq::find($id);
+        return view('admin.faq.detailsfaq', $data);
     }
 
     /**

@@ -53,6 +53,9 @@ Route::get('admin/add-featured-product/{id}', 'ProductController@savefproduct')-
 Route::delete('admin/fproductdelete/{id}', 'ProductController@fproductdelete')->name('fproduct.delete');
 
 
+//FaqController
+Route::resource('admin/faq', 'FaqController');
+
 //SettingController
 
 Route::get('/setting', 'SettingController@index')->name('setting.index');
