@@ -8,7 +8,7 @@
     <div class="container">
         <div class="mt-3">
             <h3 class="text-center my-3 text-primary d-inline">FAQ List</h3>
-            <p class="d-inline"><a href="{{ route('category.create') }}" class="float-right mr-5 btn btn-primary">Add Category</a></p>
+            <p class="d-inline"><a href="{{ route('faq.create') }}" class="float-right mr-5 btn btn-primary">Add Faq</a></p>
         </div>
               
         <table class="table table-bordered mt-3">

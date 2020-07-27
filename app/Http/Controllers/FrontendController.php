@@ -10,6 +10,7 @@ use App\Order;
 use App\OrderItem;
 use App\Setting;
 use App\Contact;
+use App\Faq;
 use Auth;
 use Validator;
 
@@ -195,6 +196,11 @@ class FrontendController extends Controller
         $request->session()->forget('cart');
         return redirect()->route('homepage')->with('success', 'Order Place Successfully');
         
+    }
+
+    public function faq(){
+        $data['faqs'] = Faq::select('question', 'answer')->where('status', 1)->get();
+        return view('frontend.faq', $data);
     }
 
     public function contact(){
