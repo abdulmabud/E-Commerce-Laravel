@@ -75,7 +75,8 @@ class FaqController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['faq'] = Faq::find($id);
+        return view('admin.faq.editfaq', $data);
     }
 
     /**
@@ -87,7 +88,22 @@ class FaqController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'question' => 'required',
+            'answer' => 'required',
+            'status' => 'required'
+
+        ]);
+       
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $faqObj = Faq::find($id);
+        $faqObj->question = $request->question;
+        $faqObj->answer = $request->answer;
+        $faqObj->status = $request->status;
+        $faqObj->save();
+        return redirect()->route('faq.index')->with('success', 'FAQ Updated Successfully');
     }
 
     /**
@@ -98,6 +114,7 @@ class FaqController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Faq::find($id)->delete();
+        return redirect()->route('faq.index')->with('success', 'FAQ Deleted Successfully');
     }
 }
