@@ -46,7 +46,7 @@ class AdminController extends Controller
     }
 
     public function contact(){
-        $data['contacts'] = Contact::select('id', 'name', 'subject')->orderBy('id', 'DESC')->get();
+        $data['contacts'] = Contact::select('id', 'name', 'subject', 'created_at')->orderBy('id', 'DESC')->get();
         return view('admin.contact.index', $data);
     }
 
