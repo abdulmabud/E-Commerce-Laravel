@@ -88,7 +88,7 @@ $('.addtocart').click(function(){
   //Single Cart Item Count
   setInterval(() => {
     $.ajax({
-      url: "singlecartitemcount",
+      url: "/singlecartitemcount",
       method: 'POST',
       data: {_token: csrf},
       cache: false,
