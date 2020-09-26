@@ -80,9 +80,27 @@ $('.addtocart').click(function(){
       data: { _token: csrf },
       cache: false,
       success: function(data){
-        console.log(data);
           $('#countCart').html(data);
       }
     })
   }
+
+  //Single Cart Item Count
+  setInterval(() => {
+    $.ajax({
+      url: "singlecartitemcount",
+      method: 'POST',
+      data: {_token: csrf},
+      cache: false,
+      success: function(data){
+        var allCartItem = Object.values(data);
+        allCartItem.forEach(item => {
+          var itemId = 'q'+item['id'];
+          var itemQuantity = item['quantity'];
+         $('#'+itemId).val(itemQuantity);
+          
+        });
+      }
+    });
+  }, 1000);
   

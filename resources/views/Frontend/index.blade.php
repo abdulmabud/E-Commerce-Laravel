@@ -55,7 +55,11 @@
               </div>
               <div class="card-footer">
                 <input type="hidden" value="{{ $product->product->id }}" id="productId">
-              <button data-productid="{{ $product->product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+                @if (array_key_exists($product->product->id, $cartarr['products']))
+                  <h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = {{ $product->product->id }}>-</button> <input type="text" value="1" id="q{{ $product->product->id }}" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="{{ $product->product->id }}">+</button> </h5>
+              @else
+                <button data-productid="{{ $product->product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+              @endif
               </div>
             </div>
           </div>
@@ -78,7 +82,11 @@
               </div>
               <div class="card-footer">
                 <input type="hidden" value="{{ $product->id }}" id="productId">
-              <button data-productid="{{ $product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+                @if (array_key_exists($product->id, $cartarr['products']))
+                   <h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = {{ $product->id }}>-</button> <input type="text" value="1" id="q{{ $product->id }}" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="{{ $product->id }}">+</button> </h5>
+                @else
+                  <button data-productid="{{ $product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+                @endif
               </div>
             </div>
           </div>
@@ -105,7 +113,7 @@
       var cartaddurl ="{{ route('cart.add') }}";
       var cartupdateurl ="{{ route('cart.update') }}";
       var csrf = '{{ csrf_token() }}';
+      var singlecartcount = "{{ route('cart.scount') }}";
       var cart = <?php echo $carts; ?>;
-  
     </script>
 @endsection

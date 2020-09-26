@@ -17,7 +17,7 @@ use Validator;
 class FrontendController extends Controller
 {
     public function index(Request $request){
-        $data['products'] = Product::with('productimages')->where('status', 1)->get();
+        $data['products'] = Product::with('productimages')->where('status', 1)->orderBy('id', 'DESC')->take(8)->get();
         $data['fproducts'] = FeaturedProduct::with('product', 'product.productimages')->select('product_id')->take(8)->get();
         $data['slider_images'] = Setting::select('meta_value')->where('meta_key', 'slider_image')->get();
         $data['active'] = 1;
@@ -138,7 +138,10 @@ class FrontendController extends Controller
         }
         return $cartcount;
      }
-
+     public function singleCartItemCount(Request $request){
+        $cart = $request->session()->get('cart');
+         return $cart['products'];
+     }
     public function checkout(Request $request){
         $cart = $request->session()->get('cart');
         $cart['delivery_charge'] = Setting::select('meta_value')->where('meta_key', 'Delivery Charge')->first();
