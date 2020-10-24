@@ -55,11 +55,15 @@
               </div>
               <div class="card-footer">
                 <input type="hidden" value="{{ $product->product->id }}" id="productId">
-                @if (array_key_exists($product->product->id, $cartarr['products']))
-                  <h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = {{ $product->product->id }}>-</button> <input type="text" value="1" id="q{{ $product->product->id }}" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="{{ $product->product->id }}">+</button> </h5>
-              @else
-                <button data-productid="{{ $product->product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
-              @endif
+               @if ($isCartEmpty)
+               <button data-productid="{{ $product->product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+               @else
+                  @if (array_key_exists($product->product->id, $cartarr['products']))
+                    <h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = {{ $product->product->id }}>-</button> <input type="text" value="1" id="q{{ $product->product->id }}" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="{{ $product->product->id }}">+</button> </h5>
+                  @else
+                    <button data-productid="{{ $product->product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+                  @endif
+               @endif
               </div>
             </div>
           </div>
@@ -82,11 +86,15 @@
               </div>
               <div class="card-footer">
                 <input type="hidden" value="{{ $product->id }}" id="productId">
-                @if (array_key_exists($product->id, $cartarr['products']))
-                   <h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = {{ $product->id }}>-</button> <input type="text" value="1" id="q{{ $product->id }}" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="{{ $product->id }}">+</button> </h5>
-                @else
-                  <button data-productid="{{ $product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
-                @endif
+               @if ($isCartEmpty)
+                 <button data-productid="{{ $product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+               @else
+                  @if (array_key_exists($product->id, $cartarr['products']))
+                    <h5 class="addtocartQuantity" style="text-align: center;"><button class="minus-btn" data-minusbtn = {{ $product->id }}>-</button> <input type="text" value="1" id="q{{ $product->id }}" class="text-center" style="width: 60px;">  <button class="plus-btn" data-plusbtn="{{ $product->id }}">+</button> </h5>
+                  @else
+                    <button data-productid="{{ $product->id }}" class="btn btn-primary btn-block addtocart">Add to Cart</button>
+                  @endif
+               @endif
               </div>
             </div>
           </div>

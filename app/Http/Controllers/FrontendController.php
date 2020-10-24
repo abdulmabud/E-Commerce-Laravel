@@ -25,8 +25,10 @@ class FrontendController extends Controller
         // dd($data);
         if($cartarr == null){
             $data['cartarr'] = [];
+            $data['isCartEmpty'] = true;
         }else{
             $data['cartarr'] = $cartarr;
+            $data['isCartEmpty'] = false;
         }
         // dd($data);
         return view('frontend.index', $data);
@@ -49,10 +51,13 @@ class FrontendController extends Controller
         $data['category'] = Category::with('products')->select('id', 'name')->where('slug', $slug)->first();
         // dd($slug);
         $cartarr = $request->session()->get('cart');
+        // dd($cartarr);
         if($cartarr == null){
             $data['cartarr'] = [];
+            $data['isCartEmpty'] = true;
         }else{
             $data['cartarr'] = $cartarr;
+            $data['isCartEmpty'] = false;
         }
         return view('frontend.categoryproduct', $data);
     }
