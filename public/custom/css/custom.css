@@ -9,3 +9,22 @@
     border-radius: 30%;
     color: white;
 }
+
+.carticon{
+    position: fixed;
+    top: 50vh;
+    right: 10px;
+    z-index: 5;
+}
+
+.carticon span{
+    display: block;
+    font-size: 25px;
+    background: red;
+    color: white;
+    font-style: italic;
+}
+
+.carticon img{
+    width: 75px;
+}
