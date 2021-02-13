@@ -81,6 +81,7 @@ $('.addtocart').click(function(){
       cache: false,
       success: function(data){
           $('#countCart').html(data);
+          $('#iconcart').html(data);
       }
     })
   }

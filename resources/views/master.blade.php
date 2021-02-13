@@ -27,7 +27,7 @@
   <!-- Footer -->
   <div class="carticon">
     <p>
-      <span class="text-center">0</span>
+      <span class="text-center" id="iconcart">0</span>
       <img src="{{ asset('/custom/img/carticon1.png') }}" alt="">
     </p>
   </div>
