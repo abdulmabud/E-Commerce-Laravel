@@ -16,17 +16,17 @@
        <div class="modal-dialog" role="document">
        <div class="modal-content">
            <div class="modal-header">
-           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+           <h5 class="modal-title" id="exampleModalLabel">Cart Product List</h5>
            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
            </button>
            </div>
-           <div class="modal-body">
-               <h3> Lorem, ipsum dolor sit am vel qui consequatur quo delectus dignissimos aut dolorem. Exercitationem saepe sapiente officiis assumenda dolore. Dolor tenetur excepturi aspernatur eum laborum accusantium, nihil dolorem. Maxime veniam recusandae corporis voluptas eius dolor facilis quisquam iste odit. Deleniti asperiores repellat suscipit pariatur iusto iste voluptate optio quibusdam animi error! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda, quo possimus iusto nemo obcaecati autem aliquid recusandae quas ut dolores!</h3>
-           </div>
+           <div class="modal-body" id="cartlistbody">
+               
+            </div>
            <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary">Save changes</button>
+                <a href="{{ route('cart.show') }}" class="btn w-25 m-auto btn-primary">Cart</a>
+                <a href="{{ route('checkout') }}" class="btn w-25 m-auto btn-primary">Checkout</a>
            </div>
        </div>
        </div>

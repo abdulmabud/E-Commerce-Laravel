@@ -128,6 +128,12 @@ class FrontendController extends Controller
          
      }
 
+     public function showCartList(Request $request){
+         $cart = $request->session()->get('cart');
+        //  dd($cart);
+        return view('frontend.inc.content.showcartlist', $cart);
+     }
+
      public function removeItem(Request $request){
          $productId = $request->productId;
          $cart = $request->session()->get('cart');

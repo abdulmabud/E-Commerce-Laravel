@@ -104,4 +104,17 @@ $('.addtocart').click(function(){
       }
     });
   }, 1000);
+
+  //Show cart product list when click cart icon
+  $('#iconcartp').click(function(){
+    $.ajax({
+      url: "/showcartlist",
+      method: 'POST',
+      data: {_token: csrf},
+      cache: false,
+      success: function(data){
+          $('#cartlistbody').html(data);
+      }
+    });
+  });
   
