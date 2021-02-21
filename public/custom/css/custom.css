@@ -3,6 +3,10 @@
     margin-bottom: 10%;
 }
 
+#iconcartp{
+    cursor: pointer;
+}
+
 #countCart{
     padding: 2px 3px;
     background-color: #1cbd3f;
@@ -12,7 +16,7 @@
 
 .carticon{
     position: fixed;
-    top: 50vh;
+    top: 40vh;
     right: 10px;
     z-index: 5;
 }
@@ -27,4 +31,10 @@
 
 .carticon img{
     width: 75px;
+}
+
+.modal-dialog{
+    width: 70%;
+    max-width: 700px;
+    
 }

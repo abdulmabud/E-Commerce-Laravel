@@ -25,12 +25,13 @@
   @include('frontend.inc.message')
   @yield('content')
   <!-- Footer -->
-  <div class="carticon">
-    <p>
+  {{-- <div class="carticon">
+    <p id="iconcartp">
       <span class="text-center" id="iconcart">0</span>
       <img src="{{ asset('/custom/img/carticon1.png') }}" alt="">
     </p>
-  </div>
+  </div> --}}
+  @include('frontend.inc.cartmodal')
   <footer class="py-5 bg-dark">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Abdul Mabud 2020</p>
