@@ -8,6 +8,7 @@ use App\FeaturedProduct;
 use App\Category;
 use App\Order;
 use App\OrderItem;
+use App\OrderStatus;
 use App\Setting;
 use App\Contact;
 use App\Faq;
@@ -200,9 +201,15 @@ class FrontendController extends Controller
         $orderObj->delivery_charge = $request->delivery_charge;
         $orderObj->total_price = $request->total_price;
 
+        $orderObj->save();
+
+        $create = OrderStatus::create([
+            'order_id' => $lastOrderId,
+            'status' => 'Pending'
+        ]);
+
         $cart = $request->session()->get('cart');
 
-        $orderObj->save();
 
         if($cart != null){
            
