@@ -119,7 +119,7 @@ class FrontendController extends Controller
         $cart = $request->session()->get('cart');
         // unset($cart['products'][4]);
         $request->session()->put('cart', $cart);
-        if($cart == null){
+        if($cart['products'] == []){
             return view('frontend.cartnoitem');
         }else{
             $cart['delivery_charge'] = Setting::select('meta_value')->where('meta_key', 'Delivery Charge')->first();
@@ -161,6 +161,9 @@ class FrontendController extends Controller
      }
     public function checkout(Request $request){
         $cart = $request->session()->get('cart');
+        if($cart['products'] == []){
+            return redirect()->route('cart.show');
+        }
         $cart['delivery_charge'] = Setting::select('meta_value')->where('meta_key', 'Delivery Charge')->first();
         return view('frontend.checkout', $cart);
     }
