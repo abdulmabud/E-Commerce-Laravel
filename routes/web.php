@@ -39,6 +39,7 @@ Route::get('/my-account/order/{id}', 'UserController@orderdetails')->name('myacc
 
 Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 Route::get('/admin/order', 'AdminController@order')->name('admin.order');
+Route::post('/admin/orderfilter', 'AdminController@orderFilter')->name('admin.orderfilter');
 Route::get('/admin/order/{id}', 'AdminController@orderDetails')->name('admin.order.details');
 Route::post('/admin/status-change', 'AdminController@changeStatus')->name('order.status.change');
 Route::get('/admin/contact', 'AdminController@contact')->name('contact.index');

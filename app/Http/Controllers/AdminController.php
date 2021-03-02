@@ -25,6 +25,18 @@ class AdminController extends Controller
         return view('admin.order.order', $data);
     }
 
+    public function orderFilter(Request $request){
+        $status = $request->filterby;
+        if($status != 'All'){
+            $data['orders'] = OrderStatus::with('order')->where([
+                'status' => $status,
+                'active_now' => 1
+            ])->orderBy('id', 'DESC')->get();
+        }else{
+            $data['orders'] = OrderStatus::with('order')->where('active_now', 1)->orderBy('id', 'DESC')->get();
+        }
+        return view('admin.inc.content.orderfilter', $data);
+    }
 
     public function orderDetails($id){
         $data['order'] = Order::with('orderstatuses')->find($id);
