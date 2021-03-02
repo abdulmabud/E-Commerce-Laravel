@@ -20,9 +20,11 @@ class AdminController extends Controller
     }
 
     public function order(){
-        $data['orders'] = Order::orderBy('id', 'desc')->get();
+        $data['orders'] = Order::with('orderstatuses')->get();
+        // dd($data['orders']);
         return view('admin.order.order', $data);
     }
+
 
     public function orderDetails($id){
         $data['order'] = Order::with('orderstatuses')->find($id);
@@ -38,8 +40,13 @@ class AdminController extends Controller
         if($validator->fails()){
             return 'failed';
         }
+
+        $order_id = $request->order_id;
+
+        OrderStatus::where('order_id', $order_id)->update(['active_now' => 0]);
+       
         $statusObj = new OrderStatus();
-        $statusObj->order_id = $request->order_id;
+        $statusObj->order_id = $order_id;
         $statusObj->status = $request->status;
         $statusObj->save();
         return 'success';

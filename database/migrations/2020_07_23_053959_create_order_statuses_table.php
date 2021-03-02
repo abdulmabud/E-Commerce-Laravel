@@ -17,6 +17,7 @@ class CreateOrderStatusesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
             $table->string('status', 50);
+            $table->tinyInteger('active_now')->default(1);
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders');
         });
