@@ -35,38 +35,45 @@ Route::post('/order','FrontendController@store')->name('order.store');
 Route::get('/my-account', 'UserController@account')->name('myaccount');
 Route::get('/my-account/order/{id}', 'UserController@orderdetails')->name('myaccount.orderdetails');
 
-//AdminController
 
-Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
-Route::get('/admin/order', 'AdminController@order')->name('admin.order');
-Route::post('/admin/orderfilter', 'AdminController@orderFilter')->name('admin.orderfilter');
-Route::get('/admin/order/{id}', 'AdminController@orderDetails')->name('admin.order.details');
-Route::post('/admin/status-change', 'AdminController@changeStatus')->name('order.status.change');
-Route::get('/admin/contact', 'AdminController@contact')->name('contact.index');
-Route::get('/admin/contact/{id}', 'AdminController@contactDetails')->name('contact.details');
+// Admin Group Route
 
+Route::group(['prefix' => 'admin'], function () {
+    //AdminController
 
-//ProductController 
-
-Route::resource('admin/product', 'ProductController');
-Route::resource('admin/category', 'CategoryController');
-
-Route::get('admin/featuredproduct', 'ProductController@featuredproduct')->name('featuredproduct.index');
-Route::post('admin/add-featured-product', 'ProductController@addfproduct')->name('addfproduct');
-Route::get('admin/add-featured-product/{id}', 'ProductController@savefproduct')->name('savefproduct');
-Route::delete('admin/fproductdelete/{id}', 'ProductController@fproductdelete')->name('fproduct.delete');
+    Route::get('dashboard', 'AdminController@index')->name('admin.dashboard');
+    Route::get('order', 'AdminController@order')->name('admin.order');
+    Route::post('orderfilter', 'AdminController@orderFilter')->name('admin.orderfilter');
+    Route::get('order/{id}', 'AdminController@orderDetails')->name('admin.order.details');
+    Route::post('status-change', 'AdminController@changeStatus')->name('order.status.change');
+    Route::get('contact', 'AdminController@contact')->name('contact.index');
+    Route::get('contact/{id}', 'AdminController@contactDetails')->name('contact.details');
 
 
-//FaqController
-Route::resource('admin/faq', 'FaqController');
+    //ProductController 
 
-//SettingController
+    Route::resource('product', 'ProductController');
+    Route::resource('category', 'CategoryController');
 
-Route::get('/setting', 'SettingController@index')->name('setting.index');
-Route::post('/setting/deliverycharge', 'SettingController@dCharge')->name('setting.delivery.charge');
-Route::get('/setting/update-slider', 'SettingController@updateSlider')->name('slider.update');
-Route::post('/setting/update-slider/add', 'SettingController@storeSlider')->name('slider.store');
-Route::delete('/setting/update-slider/delete/{id}', 'SettingController@destroySlider')->name('slider.remove');
+    Route::get('featuredproduct', 'ProductController@featuredproduct')->name('featuredproduct.index');
+    Route::post('add-featured-product', 'ProductController@addfproduct')->name('addfproduct');
+    Route::get('add-featured-product/{id}', 'ProductController@savefproduct')->name('savefproduct');
+    Route::delete('fproductdelete/{id}', 'ProductController@fproductdelete')->name('fproduct.delete');
+
+
+    //FaqController
+    Route::resource('faq', 'FaqController');
+
+    //SettingController
+
+    Route::get('/setting', 'SettingController@index')->name('setting.index');
+    Route::post('/setting/deliverycharge', 'SettingController@dCharge')->name('setting.delivery.charge');
+    Route::get('/setting/update-slider', 'SettingController@updateSlider')->name('slider.update');
+    Route::post('/setting/update-slider/add', 'SettingController@storeSlider')->name('slider.store');
+    Route::delete('/setting/update-slider/delete/{id}', 'SettingController@destroySlider')->name('slider.remove');
+
+});
+
 
 
 // test code
