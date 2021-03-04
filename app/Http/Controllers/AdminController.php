@@ -16,7 +16,12 @@ class AdminController extends Controller
     }
     
     public function index(){
-        return view('admin.dashboard');
+        $data['pending'] = OrderStatus::where(['status'=>'Pending', 'active_now'=>1])->count();
+        $data['accepted'] = OrderStatus::where(['status'=>'Accepted', 'active_now'=>1])->count();
+        $data['assigned'] = OrderStatus::where(['status'=>'Assigned', 'active_now'=>1])->count();
+        $data['delivered'] = OrderStatus::where(['status'=>'Delivered', 'active_now'=>1])->count();
+        $data['canceled'] = OrderStatus::where(['status'=>'Canceled', 'active_now'=>1])->count();
+        return view('admin.dashboard', $data);
     }
 
     public function order(){
