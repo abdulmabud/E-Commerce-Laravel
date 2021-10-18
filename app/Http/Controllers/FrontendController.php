@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
-use App\FeaturedProduct;
-use App\Category;
-use App\Order;
-use App\OrderItem;
-use App\OrderStatus;
-use App\Setting;
-use App\Contact;
-use App\Faq;
-use Auth;
-use Validator;
+use App\Models\Product;
+use App\Models\FeaturedProduct;
+use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\OrderStatus;
+use App\Models\Setting;
+use App\Models\Contact;
+use App\Models\Faq;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FrontendController extends Controller
 {

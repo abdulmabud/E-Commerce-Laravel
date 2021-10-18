@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-use Validator;
+use App\Models\Category;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -14,9 +14,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct(){
-        $this->middleware('isadmin');
-    }
+    // public function __construct(){
+    //     $this->middleware('isadmin');
+    // }
     
     public function index()
     {

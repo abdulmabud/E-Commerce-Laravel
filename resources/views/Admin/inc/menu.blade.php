@@ -9,8 +9,8 @@
       <a href="{{ route('contact.index') }}" class="list-group-item list-group-item-action bg-light">User Contact Us</a>
       <a href="{{ route('faq.index') }}" class="list-group-item list-group-item-action bg-light">FAQ</a>
       <a href="{{ route('setting.index') }}" class="list-group-item list-group-item-action bg-light">Setting</a>
-      <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-light" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      {{-- <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-light" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a> --}}
+      {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> --}}
         @csrf
     </form>
     </div>

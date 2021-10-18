@@ -1,5 +1,14 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,29 +20,30 @@
 |
 */
 
-Route::get('/', 'FrontendController@index')->name('homepage');
-Route::get('/product/{id}', 'FrontendController@productDetail')->name('product.details');
-Route::get('category/{slug}', 'FrontendController@categoryProduct')->name('category.product');
 
-Route::post('/cart', 'FrontendController@cartAdd')->name('cart.add');
-Route::post('/cartupdate', 'FrontendController@cartUpdate')->name('cart.update');
-Route::get('/cart', 'FrontendController@showCart')->name('cart.show');
-Route::post('/showcartlist', 'FrontendController@showCartList')->name('cart.showlist');
-Route::post('/cartitemremove', 'FrontendController@removeItem')->name('cart.removeitem');
-Route::post('/cartitemcount', 'FrontendController@cartitemcount')->name('cart.count');
-Route::post('/singlecartitemcount', 'FrontendController@singleCartItemCount')->name('cart.scount');
-Route::get('/faq', 'FrontendController@faq')->name('faq');
-Route::get('/contact', 'FrontendController@contact')->name('contact');
-Route::post('/contact', 'FrontendController@storeContact')->name('contact.store');
+Route::get('/', [FrontendController::class, 'index'])->name('homepage');
+Route::get('/product/{id}', [FrontendController::class, 'productDetail'])->name('product.details');
+Route::get('category/{slug}', [FrontendController::class, 'categoryProduct'])->name('category.product');
 
-Route::get('/checkout', 'FrontendController@checkout')->name('checkout');
+Route::post('/cart', [FrontendController::class, 'cartAdd'])->name('cart.add');
+Route::post('/cartupdate', [FrontendController::class, 'cartUpdate'])->name('cart.update');
+Route::get('/cart', [FrontendController::class, 'showCart'])->name('cart.show');
+Route::post('/showcartlist', [FrontendController::class, 'showCartList'])->name('cart.showlist');
+Route::post('/cartitemremove', [FrontendController::class, 'removeItem'])->name('cart.removeitem');
+Route::post('/cartitemcount', [FrontendController::class, 'cartitemcount'])->name('cart.count');
+Route::post('/singlecartitemcount', [FrontendController::class, 'singleCartItemCount'])->name('cart.scount');
+Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/contact', [FrontendController::class, 'storeContact'])->name('contact.store');
 
-Route::post('/order','FrontendController@store')->name('order.store');
+Route::get('/checkout', [FrontendController::class, 'checkout'])->name('checkout');
+
+Route::post('/order',[FrontendController::class, 'store'])->name('order.store');
 
 
 //UserController
-Route::get('/my-account', 'UserController@account')->name('myaccount');
-Route::get('/my-account/order/{id}', 'UserController@orderdetails')->name('myaccount.orderdetails');
+Route::get('/my-account', [UserController::class, 'account'])->name('myaccount');
+Route::get('/my-account/order/{id}', [UserController::class, 'orderdetails'])->name('myaccount.orderdetails');
 
 
 // Admin Group Route
@@ -41,36 +51,36 @@ Route::get('/my-account/order/{id}', 'UserController@orderdetails')->name('myacc
 Route::group(['prefix' => 'admin'], function () {
     //AdminController
 
-    Route::get('dashboard', 'AdminController@index')->name('admin.dashboard');
-    Route::get('order', 'AdminController@order')->name('admin.order');
-    Route::post('orderfilter', 'AdminController@orderFilter')->name('admin.orderfilter');
-    Route::get('order/{id}', 'AdminController@orderDetails')->name('admin.order.details');
-    Route::post('status-change', 'AdminController@changeStatus')->name('order.status.change');
-    Route::get('contact', 'AdminController@contact')->name('contact.index');
-    Route::get('contact/{id}', 'AdminController@contactDetails')->name('contact.details');
+    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('order', [AdminController::class, 'order'])->name('admin.order');
+    Route::post('orderfilter', [AdminController::class, 'orderFilter'])->name('admin.orderfilter');
+    Route::get('order/{id}', [AdminController::class, 'orderDetails'])->name('admin.order.details');
+    Route::post('status-change', [AdminController::class, 'changeStatus'])->name('order.status.change');
+    Route::get('contact', [AdminController::class, 'contact'])->name('contact.index');
+    Route::get('contact/{id}', [AdminController::class, 'contactDetails'])->name('contact.details');
 
 
     //ProductController 
 
-    Route::resource('product', 'ProductController');
-    Route::resource('category', 'CategoryController');
+    Route::resource('product', ProductController::class);
+    Route::resource('category', CategoryController::class);
 
-    Route::get('featuredproduct', 'ProductController@featuredproduct')->name('featuredproduct.index');
-    Route::post('add-featured-product', 'ProductController@addfproduct')->name('addfproduct');
-    Route::get('add-featured-product/{id}', 'ProductController@savefproduct')->name('savefproduct');
-    Route::delete('fproductdelete/{id}', 'ProductController@fproductdelete')->name('fproduct.delete');
+    Route::get('featuredproduct', [ProductController::class, 'featuredproduct'])->name('featuredproduct.index');
+    Route::post('add-featured-product', [ProductController::class, 'addfproduct'])->name('addfproduct');
+    Route::get('add-featured-product/{id}', [ProductController::class, 'savefproduct'])->name('savefproduct');
+    Route::delete('fproductdelete/{id}', [ProductController::class, 'fproductdelete'])->name('fproduct.delete');
 
 
     //FaqController
-    Route::resource('faq', 'FaqController');
+    Route::resource('faq', FaqController::class);
 
     //SettingController
 
-    Route::get('/setting', 'SettingController@index')->name('setting.index');
-    Route::post('/setting/deliverycharge', 'SettingController@dCharge')->name('setting.delivery.charge');
-    Route::get('/setting/update-slider', 'SettingController@updateSlider')->name('slider.update');
-    Route::post('/setting/update-slider/add', 'SettingController@storeSlider')->name('slider.store');
-    Route::delete('/setting/update-slider/delete/{id}', 'SettingController@destroySlider')->name('slider.remove');
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('/setting/deliverycharge', [SettingController::class, 'dCharge'])->name('setting.delivery.charge');
+    Route::get('/setting/update-slider', [SettingController::class, 'updateSlider'])->name('slider.update');
+    Route::post('/setting/update-slider/add', [SettingController::class, 'storeSlider'])->name('slider.store');
+    Route::delete('/setting/update-slider/delete/{id}', [SettingController::class, 'destroySlider'])->name('slider.remove');
 
 });
 
@@ -80,4 +90,4 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('profile', function () {
     // Only authenticated users may enter...
 })->middleware('auth.basic');
-Auth::routes();
+// Auth::routes();

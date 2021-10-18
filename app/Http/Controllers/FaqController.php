@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Faq;
-use Validator;
+use App\Models\Faq;
+use Illuminate\Support\Facades\Validator;
 
 class FaqController extends Controller
 {

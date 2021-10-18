@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Order;
-use App\OrderItem;
-use App\OrderStatus;
-use App\Contact;
-use Validator;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\OrderStatus;
+use App\Models\Contact;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
-    public function __construct(){
-        $this->middleware('isadmin');
-    }
+    // public function __construct(){
+    //     $this->middleware('isadmin');
+    // }
     
     public function index(){
         $data['pending'] = OrderStatus::where(['status'=>'Pending', 'active_now'=>1])->count();

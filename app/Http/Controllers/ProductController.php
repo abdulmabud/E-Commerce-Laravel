@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
-use App\FeaturedProduct;
-use App\ProductImage;
-use App\Category;
-use Validator;
+use App\Models\Product;
+use App\Models\FeaturedProduct;
+use App\Models\ProductImage;
+use App\Models\Category;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -17,9 +17,9 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct(){
-        $this->middleware('isadmin');
-    }
+    // public function __construct(){
+    //     $this->middleware('isadmin');
+    // }
     
     public function index()
     {
