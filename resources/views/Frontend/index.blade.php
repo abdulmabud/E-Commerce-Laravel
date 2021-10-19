@@ -14,7 +14,7 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           @foreach ($slider_images as $image)
-        <div class="carousel-item {{ $active == 1 ? 'active':'' }}">
+        <div class="carousel-item {{ $active == 1 ? 'active':'' }}" style="height: 400px">
             <img class="d-block img-fluid" src="{{ asset('upload/slider/'.$image->meta_value) }}" width="100%" alt="First slide">
           </div>
           @php
@@ -45,7 +45,7 @@
           @foreach ($fproducts as $product)
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="{{ route('product.details', $product->product->id) }}"><img class="card-img-top" src="{{  count($product->product->productimages) > 0 ?  asset('/upload/product/image/'.$product->product->productimages[0]->image) : asset('/upload/product/image/noImage.PNG') }}" alt=""></a>
+              <a href="{{ route('product.details', $product->product->id) }}"><img class="card-img-top" src="{{  count($product->product->productimages) > 0 ?  asset('/upload/product/image/'.$product->product->productimages[0]->image) : asset('/upload/product/image/noImage.PNG') }}" height="170px" alt="product image"></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="{{ route('product.details', $product->product->id) }}">{{  $product->product->name   }}</a>
@@ -76,7 +76,7 @@
           @foreach ($products as $product)
           <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="{{ route('product.details', $product->id) }}"><img class="card-img-top" src="{{  count($product->productimages) > 0 ?  asset('/upload/product/image/'.$product->productimages[0]->image) : asset('/upload/product/image/noImage.PNG') }}" alt=""></a>
+              <a href="{{ route('product.details', $product->id) }}"><img class="card-img-top" src="{{  count($product->productimages) > 0 ?  asset('/upload/product/image/'.$product->productimages[0]->image) : asset('/upload/product/image/noImage.PNG') }}" height="170px" alt="product image"></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="{{ route('product.details', $product->id) }}">{{  $product->name   }}</a>

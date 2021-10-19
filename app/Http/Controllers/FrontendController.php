@@ -49,8 +49,8 @@ class FrontendController extends Controller
 
     public function categoryProduct($slug, Request $request){
         
-        $data['category'] = Category::with('products')->select('id', 'name')->where('slug', $slug)->first();
-        // dd($slug);
+        $data['category'] = Category::with('products', 'products.productimages')->select('id', 'name')->where('slug', $slug)->first();
+        // dd($data['category']);
         $cartarr = $request->session()->get('cart');
         // dd($cartarr);
         if($cartarr == null){
