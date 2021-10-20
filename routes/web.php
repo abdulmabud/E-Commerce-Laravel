@@ -50,7 +50,7 @@ Route::get('/my-account/order/{id}', [UserController::class, 'orderdetails'])->n
 
 // Admin Group Route
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin']], function () {
     //AdminController
 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
