@@ -7,6 +7,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,7 +52,7 @@ Route::get('/my-account/order/{id}', [UserController::class, 'orderdetails'])->n
 Route::group(['prefix' => 'admin'], function () {
     //AdminController
 
-    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('order', [AdminController::class, 'order'])->name('admin.order');
     Route::post('orderfilter', [AdminController::class, 'orderFilter'])->name('admin.orderfilter');
     Route::get('order/{id}', [AdminController::class, 'orderDetails'])->name('admin.order.details');
