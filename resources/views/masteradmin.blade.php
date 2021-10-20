@@ -34,6 +34,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <a href="{{ route('homepage') }}" target="_blank" class="nav-link btn btn-primary mx-2" style="padding: 6px 10px;">Visit Site</a>
       </nav>
       @include('admin.inc.message')
       @yield('content')

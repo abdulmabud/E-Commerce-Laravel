@@ -14,6 +14,9 @@ class UserController extends Controller
         $this->middleware('auth');
     }
     public function account(){
+        if(Auth::user()->is_admin == 1){
+            return redirect()->route('admin.dashboard');
+        }
         $user_id = Auth::user()->id;
         $data['user'] = User::where('id', $user_id)->first();
         $data['orders'] = Order::where('user_id', $user_id)->orderBy('id', 'DESC')->get();
