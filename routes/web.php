@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FrontendController;
@@ -85,7 +86,13 @@ Route::group(['prefix' => 'admin'], function () {
 
 });
 
+// User Authentication
 
+Route::get('register', [AuthController::class, 'registerForm'])->name('register');
+Route::post('register', [AuthController::class, 'register'])->name('register');
+Route::get('login', [AuthController::class, 'loginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // test code
 Route::get('profile', function () {
